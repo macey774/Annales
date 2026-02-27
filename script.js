@@ -464,7 +464,7 @@ function renderAccueil() {
             <ul>
                 ${ecole.filieres.map(f => `<li><a href="#">${f}</a></li>`).join('')}
             </ul>
-            <a href="#${ecole.id}" class="btn-campus">Voir toutes les filières ?</a>
+            <a href="#${ecole.id}" class="btn-campus">Voir toutes les filières →</a>
         </div>
     `).join('');
 
@@ -485,22 +485,22 @@ function renderAccueil() {
         </section>
 
         <section class="section">
-            <h2>??? Choisissez votre école</h2>
+            <h2>🏛️ Choisissez votre école</h2>
             <div class="campus-grid">
                 ${ecoleCards}
             </div>
         </section>
 
         <section class="section">
-            <h2>?? Dernières annales</h2>
+            <h2>🆕 Dernières annales</h2>
             <ul class="latest-list">
                 ${latestList}
             </ul>
-            <p style="text-align: right; margin-top: 1rem;"><a href="#">Voir toutes les annales récentes ?</a></p>
+            <p style="text-align: right; margin-top: 1rem;"><a href="#">Voir toutes les annales récentes →</a></p>
         </section>
 
         <section class="section contrib-box">
-            <h2 style="border-left: none; text-align: center;">?? Tu as des annales ?</h2>
+            <h2 style="border-left: none; text-align: center;">📤 Tu as des annales ?</h2>
             <p>Partage tes sujets et corrigés avec la communauté ! Envoyez-nous vos fichiers (PDF) par email ou via notre formulaire.</p>
             <a href="#contact" class="btn-contrib">Je contribue</a>
         </section>
@@ -522,7 +522,7 @@ function renderEcole(ecoleId) {
         // Titre avec lien vers tous les sujets
         specialitesHtml += `<div style="display: flex; justify-content: space-between; align-items: center;">`;
         specialitesHtml += `<h2 class="specialite-title">${spec.nom}</h2>`;
-        specialitesHtml += `<a href="#${ecoleId}/${spec.id}" class="btn-show-all">?? Tous les sujets</a>`;
+        specialitesHtml += `<a href="#${ecoleId}/${spec.id}" class="btn-show-all">📋 Tous les sujets</a>`;
         specialitesHtml += `</div>`;
 
         spec.niveaux.forEach(niveau => {
@@ -539,7 +539,7 @@ function renderEcole(ecoleId) {
             // Si plus de 3 matières, lien vers la page du niveau
             if (niveau.matieres.length > 3) {
                 const niveauPath = `#${ecoleId}/${spec.id}/${niveau.id}`;
-                specialitesHtml += `<li><a href="${niveauPath}" class="btn-show-all">? Voir toutes les matières (${niveau.matieres.length})</a></li>`;
+                specialitesHtml += `<li><a href="${niveauPath}" class="btn-show-all">➕ Voir toutes les matières (${niveau.matieres.length})</a></li>`;
             }
 
             specialitesHtml += `</ul>`;
@@ -600,11 +600,11 @@ function renderNiveau(ecoleId, specialiteId, niveauId) {
         <div class="campus-header" style="margin-bottom: 1rem;">
             <h1>${foundSpecialite.nom} - ${foundNiveau.nom}</h1>
             <p>${ecole.nom} - Toutes les matières</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour à l'école</a>
+            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">← Retour à l'école</a>
         </div>
 
         <section class="section">
-            <h2>?? Matières disponibles</h2>
+            <h2>📚 Matières disponibles</h2>
             <ul class="matieres-list" style="list-style: none; padding: 0;">
                 ${matieresList}
             </ul>
@@ -658,8 +658,8 @@ function renderSpecialite(ecoleId, specialiteId) {
                 <span class="annale-badge">${annale.annee} - ${annale.session}</span>
                 <span class="annale-matiere">${annale.matiere} (${annale.niveau})</span>
                 <span class="annale-links">
-                    <a href="${annale.sujet}" target="_blank">?? Sujet</a>
-                    ${annale.corrige ? `<a href="${annale.corrige}" target="_blank">? Corrigé</a>` : ''}
+                    <a href="${annale.sujet}" target="_blank">📄 Sujet</a>
+                    ${annale.corrige ? `<a href="${annale.corrige}" target="_blank">✅ Corrigé</a>` : ''}
                 </span>
             </li>
         `;
@@ -673,17 +673,17 @@ function renderSpecialite(ecoleId, specialiteId) {
         <div class="campus-header" style="margin-bottom: 1rem;">
             <h1>${foundSpecialite.nom} - Tous les sujets</h1>
             <p>${ecole.nom}</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour à l'école</a>
+            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">← Retour à l'école</a>
         </div>
 
         <div class="filter-years" id="filter-years-specialite">
-            <span>?? Filtrer par année :</span>
+            <span>📅 Filtrer par année :</span>
             <button class="year-btn active" data-year="all">Toutes</button>
             ${filterButtons}
         </div>
 
         <section class="section">
-            <h2>?? Anciens sujets d'examen</h2>
+            <h2>📋 Anciens sujets d'examen</h2>
             <ul class="annales-list" id="annales-specialite-list" style="list-style: none; padding: 0;">
                 ${annalesList}
             </ul>
@@ -730,8 +730,8 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
         <li data-annee="${annale.annee}">
             <span class="annale-badge">${annale.annee} - ${annale.session}</span>
             <span class="annale-links">
-                <a href="${annale.sujet}" target="_blank">?? Sujet</a>
-                ${annale.corrige ? `<a href="${annale.corrige}" target="_blank">? Corrigé</a>` : ''}
+                <a href="${annale.sujet}" target="_blank">📄 Sujet</a>
+                ${annale.corrige ? `<a href="${annale.corrige}" target="_blank">✅ Corrigé</a>` : ''}
             </span>
         </li>
     `).join('');
@@ -744,17 +744,17 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
         <div class="campus-header" style="margin-bottom: 1rem;">
             <h1>${foundMatiere.nom}</h1>
             <p>${foundSpecialite.nom} - ${foundNiveau.nom} - ${ecole.nom}</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour à l'école</a>
+            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">← Retour à l'école</a>
         </div>
 
         <div class="filter-years" id="filter-years-matiere">
-            <span>?? Filtrer par année :</span>
+            <span>📅 Filtrer par année :</span>
             <button class="year-btn active" data-year="all">Toutes</button>
             ${filterButtons}
         </div>
 
         <section class="section">
-            <h2>?? Épreuves disponibles</h2>
+            <h2>📋 Épreuves disponibles</h2>
             <ul class="annales-list" id="annales-matiere-list" style="list-style: none; padding: 0;">
                 ${annalesList}
             </ul>
@@ -766,7 +766,7 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
 function renderContact() {
     return `
         <section class="section">
-            <h2>?? Contact</h2>
+            <h2>📞 Contact</h2>
             <p>Pour toute question, suggestion ou pour partager des annales, utilisez le formulaire ci-dessous.</p>
             <div class="contact-form">
                 <input type="text" placeholder="Votre nom" id="name">

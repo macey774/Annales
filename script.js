@@ -1,39 +1,39 @@
-// ---------- DONNÉES ----------
+// ---------- DONNÃ‰ES ----------
 
-// Données pour l'accueil (écoles)
+// DonnÃ©es pour l'accueil (Ã©coles)
 const ecoleData = [
     {
         id: "esg",
         nom: "ESG",
-        description: "Ecole Supérieure de Gestion",
-        filieres: ["Gestion", "Comptabilité", "Banque & Finance", "Marketing"]
+        description: "Ecole SupÃ©rieure de Gestion",
+        filieres: ["Gestion", "ComptabilitÃ©", "Banque & Finance", "Marketing"]
     },
     {
         id: "ista",
         nom: "ISTA",
-        description: "Institut Supérieur des Technologies Avancées",
-        filieres: ["Informatique", "Réseaux", "Télécommunications", "Intelligence artificielle"]
+        description: "Institut SupÃ©rieur des Technologies AvancÃ©es",
+        filieres: ["Informatique", "RÃ©seaux", "TÃ©lÃ©communications", "Intelligence artificielle"]
     },
     {
         id: "isa",
         nom: "ISA",
-        description: "Institut Supérieur des Sciences Appliquées",
-        filieres: ["Soins infirmiers", "Social", "Analyses médicales", "Santé publique"]
+        description: "Institut SupÃ©rieur des Sciences AppliquÃ©es",
+        filieres: ["Soins infirmiers", "Social", "Analyses mÃ©dicales", "SantÃ© publique"]
     }
 ];
 
 const annalesDataAccueil = [
-    { ecole: "ESG", titre: "Comptabilité - BTS 2024 (normale)", date: "il y a 3 jours", lien: "#" },
-    { ecole: "ISTA", titre: "Informatique - BTS 2023 (spéciale)", date: "il y a 1 semaine", lien: "#" },
+    { ecole: "ESG", titre: "ComptabilitÃ© - BTS 2024 (normale)", date: "il y a 3 jours", lien: "#" },
+    { ecole: "ISTA", titre: "Informatique - BTS 2023 (spÃ©ciale)", date: "il y a 1 semaine", lien: "#" },
     { ecole: "ESG", titre: "Gestion - BTS 2022 (normale)", date: "il y a 2 semaines", lien: "#" },
     { ecole: "ISA", titre: "Soins infirmiers - BTS 2024 (normale)", date: "il y a 3 semaines", lien: "#" }
 ];
 
-// Données pour chaque école (spécialités, niveaux, matières, annales)
+// DonnÃ©es pour chaque Ã©cole (spÃ©cialitÃ©s, niveaux, matiÃ¨res, annales)
 const ecoleDetails = {
     esg: {
         nom: "ESG",
-        nomComplet: "Ecole Supérieure de Gestion",
+        nomComplet: "Ecole SupÃ©rieure de Gestion",
         specialites: [
             {
                 id: "gestion",
@@ -45,10 +45,10 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "maths",
-                                nom: "Mathématiques",
+                                nom: "MathÃ©matiques",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null },
+                                    { annee: 2023, session: "spÃ©ciale", sujet: "#", corrige: null },
                                     { annee: 2022, session: "normale", sujet: "#", corrige: "#" }
                                 ]
                             },
@@ -65,7 +65,7 @@ const ecoleDetails = {
                                 nom: "Droit",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: null },
-                                    { annee: 2023, session: "spéciale", sujet: "#", corrige: "#" }
+                                    { annee: 2023, session: "spÃ©ciale", sujet: "#", corrige: "#" }
                                 ]
                             },
                             {
@@ -77,7 +77,7 @@ const ecoleDetails = {
                             },
                             {
                                 id: "strategie",
-                                nom: "Stratégie d'entreprise",
+                                nom: "StratÃ©gie d'entreprise",
                                 annales: [
                                     { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                                 ]
@@ -90,7 +90,7 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "maths",
-                                nom: "Mathématiques",
+                                nom: "MathÃ©matiques",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
                                     { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
@@ -98,9 +98,9 @@ const ecoleDetails = {
                             },
                             {
                                 id: "gestion_fin",
-                                nom: "Gestion financière",
+                                nom: "Gestion financiÃ¨re",
                                 annales: [
-                                    { annee: 2024, session: "spéciale", sujet: "#", corrige: null }
+                                    { annee: 2024, session: "spÃ©ciale", sujet: "#", corrige: null }
                                 ]
                             }
                         ]
@@ -109,7 +109,7 @@ const ecoleDetails = {
             },
             {
                 id: "compta",
-                nom: "Comptabilité",
+                nom: "ComptabilitÃ©",
                 niveaux: [
                     {
                         id: "bts1",
@@ -117,7 +117,7 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "compta_gen",
-                                nom: "Comptabilité générale",
+                                nom: "ComptabilitÃ© gÃ©nÃ©rale",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
                                     { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
@@ -125,7 +125,7 @@ const ecoleDetails = {
                             },
                             {
                                 id: "maths",
-                                nom: "Mathématiques",
+                                nom: "MathÃ©matiques",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" }
                                 ]
@@ -138,9 +138,9 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "compta_approf",
-                                nom: "Comptabilité approfondie",
+                                nom: "ComptabilitÃ© approfondie",
                                 annales: [
-                                    { annee: 2024, session: "spéciale", sujet: "#", corrige: null },
+                                    { annee: 2024, session: "spÃ©ciale", sujet: "#", corrige: null },
                                     { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                                 ]
                             }
@@ -158,7 +158,7 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "maths_fin",
-                                nom: "Mathématiques financières",
+                                nom: "MathÃ©matiques financiÃ¨res",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" }
                                 ]
@@ -194,7 +194,7 @@ const ecoleDetails = {
                                 nom: "Fondamentaux du marketing",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
+                                    { annee: 2023, session: "spÃ©ciale", sujet: "#", corrige: null }
                                 ]
                             }
                         ]
@@ -218,7 +218,7 @@ const ecoleDetails = {
     },
     ista: {
         nom: "ISTA",
-        nomComplet: "Institut Supérieur des Technologies Avancées",
+        nomComplet: "Institut SupÃ©rieur des Technologies AvancÃ©es",
         specialites: [
             {
                 id: "info",
@@ -245,7 +245,7 @@ const ecoleDetails = {
                             },
                             {
                                 id: "systeme",
-                                nom: "Systèmes d'exploitation",
+                                nom: "SystÃ¨mes d'exploitation",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" }
                                 ]
@@ -258,9 +258,9 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "bdd",
-                                nom: "Bases de données",
+                                nom: "Bases de donnÃ©es",
                                 annales: [
-                                    { annee: 2024, session: "spéciale", sujet: "#", corrige: null },
+                                    { annee: 2024, session: "spÃ©ciale", sujet: "#", corrige: null },
                                     { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                                 ]
                             }
@@ -270,7 +270,7 @@ const ecoleDetails = {
             },
             {
                 id: "reseaux",
-                nom: "Réseaux",
+                nom: "RÃ©seaux",
                 niveaux: [
                     {
                         id: "bts1",
@@ -278,7 +278,7 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "archi_res",
-                                nom: "Architecture des réseaux",
+                                nom: "Architecture des rÃ©seaux",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" }
                                 ]
@@ -291,7 +291,7 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "secu_res",
-                                nom: "Sécurité réseau",
+                                nom: "SÃ©curitÃ© rÃ©seau",
                                 annales: [
                                     { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                                 ]
@@ -302,7 +302,7 @@ const ecoleDetails = {
             },
             {
                 id: "telecom",
-                nom: "Télécommunications",
+                nom: "TÃ©lÃ©communications",
                 niveaux: [
                     {
                         id: "bts1",
@@ -342,7 +342,7 @@ const ecoleDetails = {
     },
     isa: {
         nom: "ISA",
-        nomComplet: "Institut Supérieur des Sciences Appliquées",
+        nomComplet: "Institut SupÃ©rieur des Sciences AppliquÃ©es",
         specialites: [
             {
                 id: "soins",
@@ -384,7 +384,7 @@ const ecoleDetails = {
                                 id: "soins_intensifs",
                                 nom: "Soins intensifs",
                                 annales: [
-                                    { annee: 2024, session: "spéciale", sujet: "#", corrige: null },
+                                    { annee: 2024, session: "spÃ©ciale", sujet: "#", corrige: null },
                                     { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                                 ]
                             }
@@ -413,7 +413,7 @@ const ecoleDetails = {
             },
             {
                 id: "analyses",
-                nom: "Analyses médicales",
+                nom: "Analyses mÃ©dicales",
                 niveaux: [
                     {
                         id: "bts2",
@@ -432,7 +432,7 @@ const ecoleDetails = {
             },
             {
                 id: "sante",
-                nom: "Santé publique",
+                nom: "SantÃ© publique",
                 niveaux: [
                     {
                         id: "bts1",
@@ -440,7 +440,7 @@ const ecoleDetails = {
                         matieres: [
                             {
                                 id: "epidemio",
-                                nom: "Epidémiologie",
+                                nom: "EpidÃ©miologie",
                                 annales: [
                                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" }
                                 ]
@@ -464,7 +464,7 @@ function renderAccueil() {
             <ul>
                 ${ecole.filieres.map(f => `<li><a href="#">${f}</a></li>`).join('')}
             </ul>
-            <a href="#${ecole.id}" class="btn-campus">Voir toutes les filières ?</a>
+            <a href="#${ecole.id}" class="btn-campus">Voir toutes les filiÃ¨res ?</a>
         </div>
     `).join('');
 
@@ -479,35 +479,35 @@ function renderAccueil() {
     return `
         <section class="hero" style="background: linear-gradient(135deg, #124e6d, #0b2b40); color: white; text-align: center; padding: 3rem 1rem; margin-bottom: 2rem; border-radius: 0 0 20px 20px;">
             <div class="container">
-                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Révisez avec les annales des examens</h2>
-                <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Retrouvez tous les sujets et corrigés des années précédentes, classés par école, filière et niveau.</p>
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">RÃ©visez avec les annales des examens</h2>
+                <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Retrouvez tous les sujets et corrigÃ©s des annÃ©es prÃ©cÃ©dentes, classÃ©s par Ã©cole, filiÃ¨re et niveau.</p>
             </div>
         </section>
 
         <section class="section">
-            <h2>??? Choisissez votre école</h2>
+            <h2>??? Choisissez votre Ã©cole</h2>
             <div class="campus-grid">
                 ${ecoleCards}
             </div>
         </section>
 
         <section class="section">
-            <h2>?? Dernières annales</h2>
+            <h2>?? DerniÃ¨res annales</h2>
             <ul class="latest-list">
                 ${latestList}
             </ul>
-            <p style="text-align: right; margin-top: 1rem;"><a href="#">Voir toutes les annales récentes ?</a></p>
+            <p style="text-align: right; margin-top: 1rem;"><a href="#">Voir toutes les annales rÃ©centes ?</a></p>
         </section>
 
         <section class="section contrib-box">
             <h2 style="border-left: none; text-align: center;">?? Tu as des annales ?</h2>
-            <p>Partage tes sujets et corrigés avec la communauté ! Envoyez-nous vos fichiers (PDF) par email ou via notre formulaire.</p>
+            <p>Partage tes sujets et corrigÃ©s avec la communautÃ© ! Envoyez-nous vos fichiers (PDF) par email ou via notre formulaire.</p>
             <a href="#contact" class="btn-contrib">Je contribue</a>
         </section>
     `;
 }
 
-// Vue École (liste des spécialités, niveaux et 3 premières matières) avec onglets
+// Vue Ã‰cole (liste des spÃ©cialitÃ©s, niveaux et 3 premiÃ¨res matiÃ¨res) avec onglets
 function renderEcole(ecoleId) {
     const ecole = ecoleDetails[ecoleId];
     if (!ecole) return renderAccueil();
@@ -530,16 +530,16 @@ function renderEcole(ecoleId) {
             specialitesHtml += `<h3 class="niveau-title">${niveau.nom}</h3>`;
             specialitesHtml += `<ul class="matieres-list">`;
 
-            // Afficher les 3 premières matières
+            // Afficher les 3 premiÃ¨res matiÃ¨res
             niveau.matieres.slice(0, 3).forEach(matiere => {
                 const matierePath = `#${ecoleId}/${spec.id}/${niveau.id}/${matiere.id}`;
                 specialitesHtml += `<li><a href="${matierePath}" class="matiere-link">${matiere.nom}</a></li>`;
             });
 
-            // Si plus de 3 matières, lien vers la page du niveau
+            // Si plus de 3 matiÃ¨res, lien vers la page du niveau
             if (niveau.matieres.length > 3) {
                 const niveauPath = `#${ecoleId}/${spec.id}/${niveau.id}`;
-                specialitesHtml += `<li><a href="${niveauPath}" class="btn-show-all">? Voir toutes les matières (${niveau.matieres.length})</a></li>`;
+                specialitesHtml += `<li><a href="${niveauPath}" class="btn-show-all">? Voir toutes les matiÃ¨res (${niveau.matieres.length})</a></li>`;
             }
 
             specialitesHtml += `</ul>`;
@@ -552,7 +552,7 @@ function renderEcole(ecoleId) {
     return `
         <div class="campus-header">
             <h1>${ecole.nom} - ${ecole.nomComplet}</h1>
-            <p>Choisissez une matière pour voir les annales disponibles.</p>
+            <p>Choisissez une matiÃ¨re pour voir les annales disponibles.</p>
         </div>
 
         <div class="campus-tabs" id="campus-tabs">
@@ -566,7 +566,7 @@ function renderEcole(ecoleId) {
     `;
 }
 
-// Vue Niveau (toutes les matières d'un niveau)
+// Vue Niveau (toutes les matiÃ¨res d'un niveau)
 function renderNiveau(ecoleId, specialiteId, niveauId) {
     const ecole = ecoleDetails[ecoleId];
     if (!ecole) return renderAccueil();
@@ -599,12 +599,12 @@ function renderNiveau(ecoleId, specialiteId, niveauId) {
     return `
         <div class="campus-header" style="margin-bottom: 1rem;">
             <h1>${foundSpecialite.nom} - ${foundNiveau.nom}</h1>
-            <p>${ecole.nom} - Toutes les matières</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour à l'école</a>
+            <p>${ecole.nom} - Toutes les matiÃ¨res</p>
+            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour Ã  l'Ã©cole</a>
         </div>
 
         <section class="section">
-            <h2>?? Matières disponibles</h2>
+            <h2>?? MatiÃ¨res disponibles</h2>
             <ul class="matieres-list" style="list-style: none; padding: 0;">
                 ${matieresList}
             </ul>
@@ -612,7 +612,7 @@ function renderNiveau(ecoleId, specialiteId, niveauId) {
     `;
 }
 
-// Vue Spécialité (tous les sujets d'une spécialité)
+// Vue SpÃ©cialitÃ© (tous les sujets d'une spÃ©cialitÃ©)
 function renderSpecialite(ecoleId, specialiteId) {
     const ecole = ecoleDetails[ecoleId];
     if (!ecole) return renderAccueil();
@@ -629,7 +629,7 @@ function renderSpecialite(ecoleId, specialiteId) {
         return '';
     }
 
-    // Collecter toutes les annales de la spécialité
+    // Collecter toutes les annales de la spÃ©cialitÃ©
     let annales = [];
     foundSpecialite.niveaux.forEach(niveau => {
         niveau.matieres.forEach(matiere => {
@@ -645,10 +645,10 @@ function renderSpecialite(ecoleId, specialiteId) {
         });
     });
 
-    // Trier par année décroissante
+    // Trier par annÃ©e dÃ©croissante
     annales.sort((a, b) => b.annee - a.annee);
 
-    // Années disponibles pour filtre
+    // AnnÃ©es disponibles pour filtre
     const annees = [...new Set(annales.map(a => a.annee))].sort((a, b) => b - a);
 
     const annalesList = annales.map(annale => {
@@ -659,7 +659,7 @@ function renderSpecialite(ecoleId, specialiteId) {
                 <span class="annale-matiere">${annale.matiere} (${annale.niveau})</span>
                 <span class="annale-links">
                     <a href="${annale.sujet}" target="_blank">?? Sujet</a>
-                    ${annale.corrige ? `<a href="${annale.corrige}" target="_blank">? Corrigé</a>` : ''}
+                    ${annale.corrige ? `<a href="${annale.corrige}" target="_blank">? CorrigÃ©</a>` : ''}
                 </span>
             </li>
         `;
@@ -673,11 +673,11 @@ function renderSpecialite(ecoleId, specialiteId) {
         <div class="campus-header" style="margin-bottom: 1rem;">
             <h1>${foundSpecialite.nom} - Tous les sujets</h1>
             <p>${ecole.nom}</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour à l'école</a>
+            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour Ã  l'Ã©cole</a>
         </div>
 
         <div class="filter-years" id="filter-years-specialite">
-            <span>?? Filtrer par année :</span>
+            <span>?? Filtrer par annÃ©e :</span>
             <button class="year-btn active" data-year="all">Toutes</button>
             ${filterButtons}
         </div>
@@ -691,7 +691,7 @@ function renderSpecialite(ecoleId, specialiteId) {
     `;
 }
 
-// Vue Matière (liste des épreuves) avec filtre par année
+// Vue MatiÃ¨re (liste des Ã©preuves) avec filtre par annÃ©e
 function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
     const ecole = ecoleDetails[ecoleId];
     if (!ecole) return renderAccueil();
@@ -723,7 +723,7 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
         return '';
     }
 
-    // Récupérer les années uniques des annales
+    // RÃ©cupÃ©rer les annÃ©es uniques des annales
     const annees = [...new Set(foundMatiere.annales.map(a => a.annee))].sort((a,b) => b - a);
 
     const annalesList = foundMatiere.annales.map(annale => `
@@ -731,7 +731,7 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
             <span class="annale-badge">${annale.annee} - ${annale.session}</span>
             <span class="annale-links">
                 <a href="${annale.sujet}" target="_blank">?? Sujet</a>
-                ${annale.corrige ? `<a href="${annale.corrige}" target="_blank">? Corrigé</a>` : ''}
+                ${annale.corrige ? `<a href="${annale.corrige}" target="_blank">? CorrigÃ©</a>` : ''}
             </span>
         </li>
     `).join('');
@@ -744,17 +744,17 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
         <div class="campus-header" style="margin-bottom: 1rem;">
             <h1>${foundMatiere.nom}</h1>
             <p>${foundSpecialite.nom} - ${foundNiveau.nom} - ${ecole.nom}</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour à l'école</a>
+            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">? Retour Ã  l'Ã©cole</a>
         </div>
 
         <div class="filter-years" id="filter-years-matiere">
-            <span>?? Filtrer par année :</span>
+            <span>?? Filtrer par annÃ©e :</span>
             <button class="year-btn active" data-year="all">Toutes</button>
             ${filterButtons}
         </div>
 
         <section class="section">
-            <h2>?? Épreuves disponibles</h2>
+            <h2>?? Ã‰preuves disponibles</h2>
             <ul class="annales-list" id="annales-matiere-list" style="list-style: none; padding: 0;">
                 ${annalesList}
             </ul>
@@ -867,12 +867,12 @@ function router() {
         app.innerHTML = renderContact();
         document.title = 'Contact - Annales IUG';
     } else if (parts.length === 1 && (parts[0] === 'esg' || parts[0] === 'ista' || parts[0] === 'isa')) {
-        // Route école
+        // Route Ã©cole
         app.innerHTML = renderEcole(parts[0]);
         document.title = `${parts[0].toUpperCase()} - Annales IUG`;
         initEcoleFilters();
     } else if (parts.length === 2) {
-        // Route spécialité : ecole/specialite
+        // Route spÃ©cialitÃ© : ecole/specialite
         const [ecoleId, specialiteId] = parts;
         if (ecoleDetails[ecoleId]) {
             app.innerHTML = renderSpecialite(ecoleId, specialiteId);
@@ -891,11 +891,11 @@ function router() {
             window.location.hash = 'accueil';
         }
     } else if (parts.length === 4) {
-        // Route matière : ecole/specialite/niveau/matiere
+        // Route matiÃ¨re : ecole/specialite/niveau/matiere
         const [ecoleId, specialiteId, niveauId, matiereId] = parts;
         if (ecoleDetails[ecoleId]) {
             app.innerHTML = renderMatiere(ecoleId, specialiteId, niveauId, matiereId);
-            document.title = `Matière - Annales IUG`;
+            document.title = `MatiÃ¨re - Annales IUG`;
             initMatiereFilters();
         } else {
             window.location.hash = 'accueil';
@@ -905,7 +905,7 @@ function router() {
         window.location.hash = 'accueil';
     }
 
-    // Mettre à jour la classe active sur les liens de navigation
+    // Mettre Ã  jour la classe active sur les liens de navigation
     document.querySelectorAll('.nav-link').forEach(link => {
         const linkHash = link.getAttribute('href').slice(1);
         if (linkHash === parts[0]) {
@@ -930,7 +930,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Écouter les changements de hash
+// Ã‰couter les changements de hash
 window.addEventListener('hashchange', router);
 
 // Premier rendu
@@ -940,6 +940,6 @@ router();
 document.addEventListener('click', (e) => {
     if (e.target.id === 'send-contact') {
         e.preventDefault();
-        alert('Message envoyé (simulation). Merci !');
+        alert('Message envoyÃ© (simulation). Merci !');
     }
 });

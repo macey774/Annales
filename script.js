@@ -1,24 +1,42 @@
 // ---------- DONNÉES ----------
 
-// Données pour l'accueil (écoles)
+// Données pour l'accueil (écoles) avec filières structurées (nom + id)
 const ecoleData = [
     {
         id: "esg",
         nom: "ESG",
         description: "Ecole Supérieure de Gestion",
-        filieres: ["Gestion", "Comptabilité", "Banque & Finance", "Marketing"]
+        filieres: [
+            { nom: "Gestion", id: "gestion" },
+            { nom: "Comptabilité", id: "compta" },
+            { nom: "Banque & Finance", id: "banque" },
+            { nom: "Marketing", id: "marketing" }
+        ],
+        logo: "https://www.univ-iug.com/assets/images/ESG.png"
     },
     {
         id: "ista",
         nom: "ISTA",
         description: "Institut Supérieur des Technologies Avancées",
-        filieres: ["Informatique", "Réseaux", "Télécommunications", "Intelligence artificielle"]
+        filieres: [
+            { nom: "Informatique", id: "info" },
+            { nom: "Réseaux", id: "reseaux" },
+            { nom: "Télécommunications", id: "telecom" },
+            { nom: "Intelligence artificielle", id: "ia" }
+        ],
+        logo: "https://www.univ-iug.com/assets/images/ista-logo.jpg"
     },
     {
         id: "isa",
         nom: "ISA",
         description: "Institut Supérieur des Sciences Appliquées",
-        filieres: ["Soins infirmiers", "Social", "Analyses médicales", "Santé publique"]
+        filieres: [
+            { nom: "Soins infirmiers", id: "soins" },
+            { nom: "Social", id: "social" },
+            { nom: "Analyses médicales", id: "analyses" },
+            { nom: "Santé publique", id: "sante" }
+        ],
+        logo: "https://www.univ-iug.com/assets/images/isa-logo.jpg"
     }
 ];
 
@@ -34,6 +52,7 @@ const ecoleDetails = {
     esg: {
         nom: "ESG",
         nomComplet: "Ecole Supérieure de Gestion",
+        logo: "https://www.univ-iug.com/assets/images/ESG.png",
         specialites: [
             {
                 id: "gestion",
@@ -219,6 +238,7 @@ const ecoleDetails = {
     ista: {
         nom: "ISTA",
         nomComplet: "Institut Supérieur des Technologies Avancées",
+        logo: "https://www.univ-iug.com/assets/images/ista-logo.jpg",
         specialites: [
             {
                 id: "info",
@@ -343,6 +363,7 @@ const ecoleDetails = {
     isa: {
         nom: "ISA",
         nomComplet: "Institut Supérieur des Sciences Appliquées",
+        logo: "https://www.univ-iug.com/assets/images/isa-logo.jpg",
         specialites: [
             {
                 id: "soins",
@@ -455,18 +476,29 @@ const ecoleDetails = {
 
 // ---------- FONCTIONS DE RENDU ----------
 
-// Vue Accueil
+// Vue Accueil (modifiée pour les liens des filières)
 function renderAccueil() {
-    const ecoleCards = ecoleData.map(ecole => `
-        <div class="campus-card">
-            <h3>${ecole.nom}</h3>
-            <div class="campus-desc">${ecole.description}</div>
-            <ul>
-                ${ecole.filieres.map(f => `<li><a href="#">${f}</a></li>`).join('')}
-            </ul>
-            <a href="#${ecole.id}" class="btn-campus">Voir toutes les filières →</a>
-        </div>
-    `).join('');
+    const ecoleCards = ecoleData.map(ecole => {
+        const searchData = `${ecole.nom} ${ecole.description} ${ecole.filieres.map(f => f.nom).join(' ')}`.toLowerCase();
+        const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
+        const filieresHtml = ecole.filieres.map(f => {
+            const lien = `#${ecole.id}/${f.id}`;
+            return `<li><a href="${lien}">${f.nom}</a></li>`;
+        }).join('');
+        return `
+            <div class="campus-card" data-search="${searchData}">
+                <div class="campus-logo">
+                    ${logoHtml}
+                </div>
+                <h3>${ecole.nom}</h3>
+                <div class="campus-desc">${ecole.description}</div>
+                <ul>
+                    ${filieresHtml}
+                </ul>
+                <a href="#${ecole.id}" class="btn-campus">Voir toutes les filières →</a>
+            </div>
+        `;
+    }).join('');
 
     const latestList = annalesDataAccueil.map(annale => `
         <li>
@@ -512,15 +544,19 @@ function renderEcole(ecoleId) {
     const ecole = ecoleDetails[ecoleId];
     if (!ecole) return renderAccueil();
 
+    const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="header-logo-img" onerror="this.style.display='none'">`;
+
     const tabsHtml = ecole.specialites.map(spec => 
         `<button class="tab-btn" data-specialite="${spec.id}">${spec.nom}</button>`
     ).join('');
 
     let specialitesHtml = '';
     ecole.specialites.forEach(spec => {
-        specialitesHtml += `<div class="specialite-section" data-specialite="${spec.id}">`;
-        // Titre avec lien vers tous les sujets
-        specialitesHtml += `<div style="display: flex; justify-content: space-between; align-items: center;">`;
+        // Construction de la chaîne de recherche pour cette spécialité
+        const searchData = `${spec.nom} ${spec.niveaux.map(n => n.nom).join(' ')} ${spec.niveaux.flatMap(n => n.matieres.map(m => m.nom)).join(' ')}`.toLowerCase();
+        
+        specialitesHtml += `<div class="specialite-section" data-specialite="${spec.id}" data-search="${searchData}">`;
+        specialitesHtml += `<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">`;
         specialitesHtml += `<h2 class="specialite-title">${spec.nom}</h2>`;
         specialitesHtml += `<a href="#${ecoleId}/${spec.id}" class="btn-show-all">📋 Tous les sujets</a>`;
         specialitesHtml += `</div>`;
@@ -551,8 +587,13 @@ function renderEcole(ecoleId) {
 
     return `
         <div class="campus-header">
-            <h1>${ecole.nom} - ${ecole.nomComplet}</h1>
-            <p>Choisissez une matière pour voir les annales disponibles.</p>
+            <div class="header-logo">
+                ${logoHtml}
+            </div>
+            <div class="header-text">
+                <h1>${ecole.nom} - ${ecole.nomComplet}</h1>
+                <p>Choisissez une matière pour voir les annales disponibles.</p>
+            </div>
         </div>
 
         <div class="campus-tabs" id="campus-tabs">
@@ -593,14 +634,21 @@ function renderNiveau(ecoleId, specialiteId, niveauId) {
 
     const matieresList = foundNiveau.matieres.map(matiere => {
         const matierePath = `#${ecoleId}/${specialiteId}/${niveauId}/${matiere.id}`;
-        return `<li><a href="${matierePath}" class="matiere-link">${matiere.nom}</a></li>`;
+        return `<li data-search="${matiere.nom.toLowerCase()}"><a href="${matierePath}" class="matiere-link">${matiere.nom}</a></li>`;
     }).join('');
 
     return `
         <div class="campus-header" style="margin-bottom: 1rem;">
-            <h1>${foundSpecialite.nom} - ${foundNiveau.nom}</h1>
-            <p>${ecole.nom} - Toutes les matières</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">← Retour à l'école</a>
+            <div class="header-logo">
+                <img src="${ecole.logo}" alt="${ecole.nom} logo" class="header-logo-img" onerror="this.style.display='none'">
+            </div>
+            <div class="header-text">
+                <h1>${foundSpecialite.nom} - ${foundNiveau.nom}</h1>
+                <p>${ecole.nom} - Toutes les matières</p>
+            </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <a href="#${ecoleId}" class="btn-campus">← Retour à l'école</a>
         </div>
 
         <section class="section">
@@ -653,8 +701,9 @@ function renderSpecialite(ecoleId, specialiteId) {
 
     const annalesList = annales.map(annale => {
         const matierePath = `#${ecoleId}/${specialiteId}/${annale.niveauId}/${annale.matiereId}`;
+        const searchData = `${annale.matiere} ${annale.niveau} ${annale.annee}`.toLowerCase();
         return `
-            <li data-annee="${annale.annee}">
+            <li data-annee="${annale.annee}" data-search="${searchData}">
                 <span class="annale-badge">${annale.annee} - ${annale.session}</span>
                 <span class="annale-matiere">${annale.matiere} (${annale.niveau})</span>
                 <span class="annale-links">
@@ -671,9 +720,16 @@ function renderSpecialite(ecoleId, specialiteId) {
 
     return `
         <div class="campus-header" style="margin-bottom: 1rem;">
-            <h1>${foundSpecialite.nom} - Tous les sujets</h1>
-            <p>${ecole.nom}</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">← Retour à l'école</a>
+            <div class="header-logo">
+                <img src="${ecole.logo}" alt="${ecole.nom} logo" class="header-logo-img" onerror="this.style.display='none'">
+            </div>
+            <div class="header-text">
+                <h1>${foundSpecialite.nom} - Tous les sujets</h1>
+                <p>${ecole.nom}</p>
+            </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <a href="#${ecoleId}" class="btn-campus">← Retour à l'école</a>
         </div>
 
         <div class="filter-years" id="filter-years-specialite">
@@ -727,7 +783,7 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
     const annees = [...new Set(foundMatiere.annales.map(a => a.annee))].sort((a,b) => b - a);
 
     const annalesList = foundMatiere.annales.map(annale => `
-        <li data-annee="${annale.annee}">
+        <li data-annee="${annale.annee}" data-search="${annale.annee} ${annale.session}">
             <span class="annale-badge">${annale.annee} - ${annale.session}</span>
             <span class="annale-links">
                 <a href="${annale.sujet}" target="_blank">📄 Sujet</a>
@@ -742,9 +798,16 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
 
     return `
         <div class="campus-header" style="margin-bottom: 1rem;">
-            <h1>${foundMatiere.nom}</h1>
-            <p>${foundSpecialite.nom} - ${foundNiveau.nom} - ${ecole.nom}</p>
-            <a href="#${ecoleId}" class="btn-campus" style="display: inline-block; margin-top: 1rem;">← Retour à l'école</a>
+            <div class="header-logo">
+                <img src="${ecole.logo}" alt="${ecole.nom} logo" class="header-logo-img" onerror="this.style.display='none'">
+            </div>
+            <div class="header-text">
+                <h1>${foundMatiere.nom}</h1>
+                <p>${foundSpecialite.nom} - ${foundNiveau.nom} - ${ecole.nom}</p>
+            </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <a href="#${ecoleId}" class="btn-campus">← Retour à l'école</a>
         </div>
 
         <div class="filter-years" id="filter-years-matiere">
@@ -852,6 +915,32 @@ function initSpecialiteFilters() {
     });
 }
 
+// ---------- RECHERCHE ----------
+
+let searchBound = false;
+
+function bindSearch() {
+    if (searchBound) return;
+    const input = document.getElementById('search-input');
+    if (!input) return;
+    input.addEventListener('input', (e) => {
+        filterContent(e.target.value.toLowerCase().trim());
+    });
+    searchBound = true;
+}
+
+function filterContent(term) {
+    const items = document.querySelectorAll('[data-search]');
+    items.forEach(item => {
+        const searchText = item.getAttribute('data-search').toLowerCase();
+        if (term === '' || searchText.includes(term)) {
+            item.style.display = '';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
 // ---------- ROUTAGE ----------
 
 const app = document.getElementById('app');
@@ -862,21 +951,20 @@ function router() {
 
     if (hash === 'accueil') {
         app.innerHTML = renderAccueil();
-        document.title = 'Accueil - Annales IUG';
+        document.title = 'Accueil - Banque d\'Annales IUG';
     } else if (hash === 'contact') {
         app.innerHTML = renderContact();
-        document.title = 'Contact - Annales IUG';
+        document.title = 'Contact - Banque d\'Annales IUG';
     } else if (parts.length === 1 && (parts[0] === 'esg' || parts[0] === 'ista' || parts[0] === 'isa')) {
         // Route école
         app.innerHTML = renderEcole(parts[0]);
-        document.title = `${parts[0].toUpperCase()} - Annales IUG`;
-        initEcoleFilters();
+        document.title = `${parts[0].toUpperCase()} - Banque d'Annales IUG`;
     } else if (parts.length === 2) {
         // Route spécialité : ecole/specialite
         const [ecoleId, specialiteId] = parts;
         if (ecoleDetails[ecoleId]) {
             app.innerHTML = renderSpecialite(ecoleId, specialiteId);
-            document.title = `Tous les sujets - ${specialiteId} - Annales IUG`;
+            document.title = `Tous les sujets - ${specialiteId} - Banque d'Annales IUG`;
             initSpecialiteFilters();
         } else {
             window.location.hash = 'accueil';
@@ -886,7 +974,7 @@ function router() {
         const [ecoleId, specialiteId, niveauId] = parts;
         if (ecoleDetails[ecoleId]) {
             app.innerHTML = renderNiveau(ecoleId, specialiteId, niveauId);
-            document.title = `Niveau - Annales IUG`;
+            document.title = `Niveau - Banque d'Annales IUG`;
         } else {
             window.location.hash = 'accueil';
         }
@@ -895,7 +983,7 @@ function router() {
         const [ecoleId, specialiteId, niveauId, matiereId] = parts;
         if (ecoleDetails[ecoleId]) {
             app.innerHTML = renderMatiere(ecoleId, specialiteId, niveauId, matiereId);
-            document.title = `Matière - Annales IUG`;
+            document.title = `Matière - Banque d'Annales IUG`;
             initMatiereFilters();
         } else {
             window.location.hash = 'accueil';
@@ -916,6 +1004,13 @@ function router() {
             link.style.textDecoration = 'none';
         }
     });
+
+    // Réappliquer la recherche après le changement de page
+    bindSearch();
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        filterContent(searchInput.value.toLowerCase().trim());
+    }
 }
 
 // ---------- GESTION DE LA NAVIGATION ----------

@@ -34,6 +34,7 @@ header .container {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 .logo h1 {
     font-size: 1.8rem;
@@ -43,14 +44,39 @@ header .container {
     font-size: 0.9rem;
     color: #a0c0d0;
 }
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
 nav a {
     color: white;
-    margin-left: 1.5rem;
     text-decoration: none;
     font-weight: 500;
+    padding: 0.5rem 0;
+    white-space: nowrap;
 }
 nav a:hover {
     text-decoration: underline;
+}
+/* Sur mobile, le nav peut passer en ligne et être scrollable horizontalement */
+@media (max-width: 600px) {
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+    }
+    nav a {
+        padding: 0.5rem 1rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 20px;
+    }
 }
 
 /* Footer */
@@ -70,6 +96,13 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+@media (max-width: 600px) {
+    footer p {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
 
 /* Styles généraux des sections */
 .section {
@@ -85,6 +118,14 @@ footer a:hover {
     color: #0b2b40;
     border-left: 5px solid #0b2b40;
     padding-left: 1rem;
+}
+@media (max-width: 600px) {
+    .section {
+        padding: 1.5rem;
+    }
+    .section h2 {
+        font-size: 1.5rem;
+    }
 }
 
 /* Page d'accueil */
@@ -184,6 +225,16 @@ footer a:hover {
     font-size: 0.9rem;
     margin-left: auto;
 }
+@media (max-width: 600px) {
+    .latest-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+    .latest-meta {
+        margin-left: 0;
+    }
+}
 
 .contrib-box {
     background: #e7f0f9;
@@ -208,7 +259,7 @@ footer a:hover {
     background: #124e6d;
 }
 
-/* Styles spécifiques aux pages campus */
+/* Styles spécifiques aux pages école */
 .campus-header {
     background: linear-gradient(135deg, #0b2b40, #1a4b6d);
     color: white;
@@ -221,13 +272,26 @@ footer a:hover {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
 }
+@media (max-width: 600px) {
+    .campus-header h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Onglets (scrollable horizontalement sur mobile) */
 .campus-tabs {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0.5rem;
     margin-bottom: 2rem;
     border-bottom: 2px solid #e0e7ef;
     padding-bottom: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.campus-tabs::-webkit-scrollbar {
+    display: none;
 }
 .tab-btn {
     background: none;
@@ -239,6 +303,7 @@ footer a:hover {
     cursor: pointer;
     border-radius: 30px;
     transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
 }
 .tab-btn:hover {
     background: #e0e7ef;
@@ -247,16 +312,26 @@ footer a:hover {
     background: #0b2b40;
     color: white;
 }
+
+/* Filtres années */
 .filter-years {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0.5rem;
     margin-bottom: 2rem;
     align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+}
+.filter-years::-webkit-scrollbar {
+    display: none;
 }
 .filter-years span {
     font-weight: 600;
     color: #1e2b3c;
+    white-space: nowrap;
 }
 .year-btn {
     background: #f0f4f8;
@@ -265,6 +340,7 @@ footer a:hover {
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 .year-btn:hover {
     background: #cbd5e1;
@@ -274,6 +350,8 @@ footer a:hover {
     color: white;
     border-color: #0b2b40;
 }
+
+/* Sections spécialités */
 .specialite-section {
     margin-bottom: 3rem;
     background: white;
@@ -288,6 +366,25 @@ footer a:hover {
     border-left: 5px solid #0b2b40;
     padding-left: 1rem;
 }
+/* Bouton Tous les sujets à côté du titre */
+.specialite-section > div:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+@media (max-width: 600px) {
+    .specialite-section > div:first-child {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .specialite-title {
+        margin-bottom: 0;
+    }
+}
+
 .niveau-block {
     margin: 1.5rem 0 1rem 1.5rem;
 }
@@ -297,9 +394,63 @@ footer a:hover {
     color: #1e4b6e;
     margin-bottom: 0.8rem;
 }
-.annales-list {
+@media (max-width: 600px) {
+    .niveau-block {
+        margin-left: 0.5rem;
+    }
+}
+
+/* Listes de matières */
+.matieres-list {
     list-style: none;
     margin-left: 1rem;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+.matieres-list li {
+    margin-bottom: 0;
+}
+.matiere-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #e7f0f9;
+    border-radius: 20px;
+    color: #0b2b40;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+.matiere-link:hover {
+    background: #cbd5e1;
+}
+.btn-show-all {
+    display: inline-block;
+    background: #e7f0f9;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.btn-show-all:hover {
+    background: #cbd5e1;
+}
+@media (max-width: 600px) {
+    .matieres-list {
+        margin-left: 0;
+        gap: 0.5rem;
+    }
+}
+
+/* Listes d'annales */
+.annales-list {
+    list-style: none;
+    margin-left: 0;
+    padding: 0;
 }
 .annales-list li {
     display: flex;
@@ -319,20 +470,37 @@ footer a:hover {
     padding: 0.2rem 0.6rem;
     border-radius: 20px;
     font-weight: 600;
+    white-space: nowrap;
 }
 .annale-links a {
     margin-right: 1rem;
     color: #2563eb;
     text-decoration: none;
     font-weight: 500;
+    white-space: nowrap;
 }
 .annale-links a:hover {
     text-decoration: underline;
 }
-.no-annales {
-    color: #94a3b8;
-    font-style: italic;
-    margin-left: 2rem;
+.annale-matiere {
+    font-weight: 500;
+    color: #1e4b6e;
+    margin-left: 1rem;
+    flex: 1;
+}
+@media (max-width: 600px) {
+    .annales-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .annale-matiere {
+        margin-left: 0;
+    }
+    .annale-links {
+        display: flex;
+        gap: 1rem;
+    }
 }
 
 /* Page contact */
@@ -348,6 +516,7 @@ footer a:hover {
     border: 1px solid #cbd5e1;
     border-radius: 8px;
     font-family: inherit;
+    font-size: 1rem;
 }
 .contact-form button {
     background: #0b2b40;
@@ -358,50 +527,8 @@ footer a:hover {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
+    width: 100%;
 }
 .contact-form button:hover {
     background: #124e6d;
-}
-
-/* Listes de matières */
-.matieres-list {
-    list-style: none;
-    margin-left: 1rem;
-    padding: 0;
-}
-.matieres-list li {
-    margin-bottom: 0.5rem;
-}
-.matiere-link {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: #e7f0f9;
-    border-radius: 20px;
-    color: #0b2b40;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.2s;
-}
-.matiere-link:hover {
-    background: #cbd5e1;
-}
-.btn-show-all {
-    display: inline-block;
-    background: #e7f0f9;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 500;
-    margin-top: 0.5rem;
-}
-.btn-show-all:hover {
-    background: #cbd5e1;
-}
-
-.annale-matiere {
-    font-weight: 500;
-    color: #1e4b6e;
-    margin-left: 1rem;
-    flex: 1;
 }

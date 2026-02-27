@@ -71,7 +71,7 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* Styles généraux des sections */
+/* Styles gÃ©nÃ©raux des sections */
 .section {
     background: white;
     border-radius: 16px;
@@ -208,7 +208,7 @@ footer a:hover {
     background: #124e6d;
 }
 
-/* Styles spécifiques aux pages campus */
+/* Styles spÃ©cifiques aux pages campus */
 .campus-header {
     background: linear-gradient(135deg, #0b2b40, #1a4b6d);
     color: white;
@@ -363,7 +363,7 @@ footer a:hover {
     background: #124e6d;
 }
 
-/* Listes de matières */
+/* Listes de matiÃ¨res */
 .matieres-list {
     list-style: none;
     margin-left: 1rem;

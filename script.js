@@ -937,22 +937,14 @@ function updateUserStatus() {
 
 // ---------- FONCTIONS DE RENDU ----------
 
-// Vue Accueil (avec couleurs des écoles)
+// Vue Accueil (avec carrousel d'images)
 function renderAccueil() {
-  const ecoleCards = ecoleData
-    .map((ecole) => {
-      const searchData = `${ecole.nom} ${
-        ecole.description
-      } ${ecole.filieres.map((f) => f.nom).join(" ")}`.toLowerCase();
-      const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
-      const schoolColor = schoolColors[ecole.id];
-      const filieresHtml = ecole.filieres
-        .slice(0, 4)
-        .map(
-          (f) => `<li><span class="campus-filiere-text">${f.nom}</span></li>`
-        )
-        .join("");
-      return `
+    const ecoleCards = ecoleData.map(ecole => {
+        const searchData = `${ecole.nom} ${ecole.description} ${ecole.filieres.map(f => f.nom).join(' ')}`.toLowerCase();
+        const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
+        const schoolColor = schoolColors[ecole.id];
+        const filieresHtml = ecole.filieres.slice(0,4).map(f => `<li><span class="campus-filiere-text">${f.nom}</span></li>`).join('');
+        return `
             <a href="#${ecole.id}" class="campus-card" data-search="${searchData}">
                 <div class="campus-logo">${logoHtml}</div>
                 <h3 style="color: ${schoolColor};">${ecole.nom}</h3>
@@ -960,33 +952,37 @@ function renderAccueil() {
                 <ul>${filieresHtml}</ul>
             </a>
         `;
-    })
-    .join("");
+    }).join('');
 
-  const latestList = annalesDataAccueil
-    .map((annale) => {
-      const ecoleId =
-        annale.ecole === "ESG"
-          ? "esg"
-          : annale.ecole === "ISTA"
-          ? "ista"
-          : "isa";
-      const schoolColor = schoolColors[ecoleId];
-      return `
+    const latestList = annalesDataAccueil.map(annale => {
+        const ecoleId = annale.ecole === "ESG" ? "esg" : annale.ecole === "ISTA" ? "ista" : "isa";
+        const schoolColor = schoolColors[ecoleId];
+        return `
             <li>
                 <span class="latest-badge" style="background: ${schoolColor};">${annale.ecole}</span>
                 <span class="latest-title"><a href="${annale.lien}">${annale.titre}</a></span>
                 <span class="latest-meta">${annale.date}</span>
             </li>
         `;
-    })
-    .join("");
+    }).join('');
 
-  return `
-        <section class="hero">
-            <div class="container">
-                <h2>Révisez avec les annales des examens</h2>
-                <p>Retrouvez tous les sujets et corrigés des années précédentes, classés par école, filière et niveau.</p>
+    return `
+        <section class="hero-carousel">
+            <div class="carousel-track">
+                <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Étudiants">
+                <img src="https://images.pexels.com/photos/159775/library-la-trobe-study-students-159775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bibliothèque">
+                <img src="https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Examen">
+                <img src="https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Maths">
+                <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Étudiants">
+                <img src="https://images.pexels.com/photos/159775/library-la-trobe-study-students-159775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bibliothèque">
+                <img src="https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Examen">
+                <img src="https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Maths">
+            </div>
+            <div class="hero-overlay">
+                <div class="container">
+                    <h2>Révisez avec les annales des examens</h2>
+                    <p>Retrouvez tous les sujets et corrigés des années précédentes, classés par école, filière et niveau.</p>
+                </div>
             </div>
         </section>
         <section class="section"><h2>🏛️ Choisissez votre école</h2><div class="campus-grid">${ecoleCards}</div></section>
@@ -1182,7 +1178,7 @@ function renderSpecialite(ecoleId, specialiteId) {
     `;
 }
 
-// Vue Matière
+// Vue Matière (avec affichage du fichier uploadé pour automatisme)
 function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
   const ecole = ecoleDetails[ecoleId];
   if (!ecole) return renderAccueil();
@@ -1230,6 +1226,24 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
     .map((y) => `<button class="year-btn" data-year="${y}">${y}</button>`)
     .join("");
 
+  // Vérifier si c'est la matière automatisme et si un fichier est uploadé
+  let uploadedHtml = '';
+  if (matiereId === 'automatisme') {
+    const uploaded = localStorage.getItem('uploaded_automatisme');
+    if (uploaded) {
+      const data = JSON.parse(uploaded);
+      uploadedHtml = `
+        <div class="uploaded-file" style="margin: 2rem 0; padding: 1rem; background: var(--gray-100); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between;">
+          <span>📎 Document ajouté : <strong>${data.name}</strong></span>
+          <div>
+            <a href="#pdf/uploaded/automatisme" class="btn-bts" style="background: ${schoolColor}; margin-right: 0.5rem;">👁️ Voir</a>
+            <button id="delete-upload-btn" class="btn-bts" style="background: #dc2626;">🗑️ Supprimer</button>
+          </div>
+        </div>
+      `;
+    }
+  }
+
   return `
         <div class="campus-header" style="background: linear-gradient(135deg, ${schoolColor}, ${schoolColor}dd);">
             <div class="header-logo"><img src="${ecole.logo}" alt="${ecole.nom} logo" class="header-logo-img" onerror="this.style.display='none'"></div>
@@ -1238,19 +1252,36 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
         <a href="#${ecoleId}" class="btn-campus" style="background: ${schoolColor};">← Retour à l'école</a>
         <div class="filter-years"><span>📅 Filtrer par année :</span><button class="year-btn active" data-year="all">Toutes</button>${filterButtons}</div>
         <section class="section"><h2>📋 Épreuves disponibles</h2><ul class="annales-list" id="annales-matiere-list">${annalesList}</ul></section>
+        ${uploadedHtml}
     `;
 }
 
-// Vue PDF
+// Vue PDF pour les fichiers standards
 function renderPdf(filePath) {
   const fullPath = filePath;
   return `
         <div class="pdf-viewer" style="padding: 1rem;">
-            <div style="margin-bottom: 1rem;">
+            <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
                 <a href="javascript:history.back()" class="btn-campus">← Retour</a>
+                <a href="${fullPath}" download class="btn-campus" style="background: var(--primary);">⬇️ Télécharger</a>
             </div>
             <iframe src="${fullPath}" width="100%" height="600px" style="border: none; border-radius: var(--radius-lg); box-shadow: var(--shadow);"></iframe>
             <p style="text-align: center; margin-top: 1rem;">Si le PDF ne s'affiche pas, <a href="${fullPath}" target="_blank">cliquez ici pour l'ouvrir</a>.</p>
+        </div>
+    `;
+}
+
+// Vue PDF pour les fichiers uploadés (base64)
+function renderUploadedPdf(data) {
+  const fileData = JSON.parse(data);
+  return `
+        <div class="pdf-viewer" style="padding: 1rem;">
+            <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                <a href="javascript:history.back()" class="btn-campus">← Retour</a>
+                <a href="${fileData.content}" download="${fileData.name}" class="btn-campus" style="background: var(--primary);">⬇️ Télécharger</a>
+            </div>
+            <iframe src="${fileData.content}" width="100%" height="600px" style="border: none; border-radius: var(--radius-lg); box-shadow: var(--shadow);"></iframe>
+            <p style="text-align: center; margin-top: 1rem;">Si le PDF ne s'affiche pas, <a href="${fileData.content}" target="_blank">cliquez ici pour l'ouvrir</a>.</p>
         </div>
     `;
 }
@@ -1349,6 +1380,68 @@ function filterContent(term) {
   });
 }
 
+// ---------- CARROUSEL ----------
+let carouselInterval = null;
+
+function initCarousel() {
+  const track = document.querySelector('.carousel-track');
+  if (!track) return;
+  const images = track.children;
+  if (images.length === 0) return;
+  
+  let currentIndex = 0;
+  
+  // Fonction pour passer à l'image suivante
+  const nextImage = () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    track.style.transition = 'transform 0.5s ease';
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  };
+  
+  // Démarrer l'intervalle
+  carouselInterval = setInterval(nextImage, 2000);
+}
+
+// ---------- UPLOAD ----------
+function initUpload() {
+    const uploadBtn = document.getElementById('upload-automatisme-btn');
+    if (!uploadBtn) return;
+    
+    // Créer un input file caché
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '*/*';
+    fileInput.style.display = 'none';
+    document.body.appendChild(fileInput);
+    
+    uploadBtn.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const base64 = e.target.result;
+            const data = {
+                name: file.name,
+                content: base64,
+                type: file.type,
+                size: file.size
+            };
+            localStorage.setItem('uploaded_automatisme', JSON.stringify(data));
+            alert('Fichier ajouté pour Automatisme !');
+            // Si on est sur la page automatisme, recharger
+            if (window.location.hash.includes('automatisme')) {
+                window.location.reload();
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
 // ---------- ROUTAGE ----------
 
 const app = document.getElementById("app");
@@ -1357,8 +1450,10 @@ function router() {
   const parts = hash.split("/").filter((p) => p.length > 0);
 
   if (hash === "accueil") {
+    if (carouselInterval) clearInterval(carouselInterval);
     app.innerHTML = renderAccueil();
     document.title = "Accueil - Banque d'Annales IUG";
+    initCarousel();
   } else if (hash === "contact") {
     app.innerHTML = renderContact();
     document.title = "Contact - Banque d'Annales IUG";
@@ -1375,9 +1470,19 @@ function router() {
       window.location.hash = "accueil";
     });
   } else if (parts.length >= 2 && parts[0] === "pdf") {
-    const filePath = parts.join("/");
-    app.innerHTML = renderPdf(filePath);
-    document.title = "Document - Banque d'Annales IUG";
+    if (parts[1] === 'uploaded' && parts[2] === 'automatisme') {
+      const data = localStorage.getItem('uploaded_automatisme');
+      if (data) {
+        app.innerHTML = renderUploadedPdf(data);
+        document.title = 'Document uploadé - Automatisme';
+      } else {
+        window.location.hash = 'accueil';
+      }
+    } else {
+      const filePath = parts.join("/");
+      app.innerHTML = renderPdf(filePath);
+      document.title = "Document - Banque d'Annales IUG";
+    }
   } else if (parts.length === 1 && ["esg", "ista", "isa"].includes(parts[0])) {
     app.innerHTML = renderEcole(parts[0]);
     document.title = `${parts[0].toUpperCase()} - Banque d'Annales IUG`;
@@ -1400,6 +1505,15 @@ function router() {
       app.innerHTML = renderMatiere(eId, sId, nId, mId);
       document.title = `Matière - Banque d'Annales IUG`;
       initMatiereFilters();
+      // Ajouter gestionnaire pour supprimer le fichier uploadé
+      const deleteBtn = document.getElementById('delete-upload-btn');
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => {
+          localStorage.removeItem('uploaded_automatisme');
+          // Recharger la même route
+          window.location.hash = hash;
+        });
+      }
     } else window.location.hash = "accueil";
   } else window.location.hash = "accueil";
 
@@ -1483,3 +1597,6 @@ if (scrollToTopBtn) {
     });
   });
 }
+
+// Initialiser l'upload après le premier rendu
+initUpload();

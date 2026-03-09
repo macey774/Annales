@@ -1320,3 +1320,121 @@ footer a:hover::after {
     margin: 0;
   }
 }
+
+/* ========== PAGE DE CONNEXION ========== */
+.login-section {
+  max-width: 450px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  border: 1px solid var(--gray-200);
+}
+
+.login-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  border-left: none;
+  padding-left: 0;
+  text-align: center;
+}
+
+.login-section p {
+  color: var(--gray-600);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.login-input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: var(--transition);
+  background: var(--gray-50);
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(11, 43, 64, 0.1);
+  background: white;
+}
+
+.login-input::placeholder {
+  color: var(--gray-400);
+}
+
+.login-btn {
+  background: var(--primary);
+  color: white;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  margin-top: 0.5rem;
+}
+
+.login-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+.login-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.login-error {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  min-height: 1.5rem;
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+.login-footer-text {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  border-top: 1px solid var(--gray-200);
+  padding-top: 1.5rem;
+}
+
+.login-footer-text a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-section {
+    margin: 1.5rem;
+    padding: 1.8rem 1.2rem;
+  }
+  .login-section h2 {
+    font-size: 1.7rem;
+  }
+}

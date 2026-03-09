@@ -935,22 +935,14 @@ function updateUserStatus() {
 
 // ---------- FONCTIONS DE RENDU ----------
 
-// Vue Accueil (sans carrousel, avec le texte simple)
+// Vue Accueil
 function renderAccueil() {
-  const ecoleCards = ecoleData
-    .map((ecole) => {
-      const searchData = `${ecole.nom} ${
-        ecole.description
-      } ${ecole.filieres.map((f) => f.nom).join(" ")}`.toLowerCase();
-      const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
-      const schoolColor = schoolColors[ecole.id];
-      const filieresHtml = ecole.filieres
-        .slice(0, 4)
-        .map(
-          (f) => `<li><span class="campus-filiere-text">${f.nom}</span></li>`
-        )
-        .join("");
-      return `
+    const ecoleCards = ecoleData.map(ecole => {
+        const searchData = `${ecole.nom} ${ecole.description} ${ecole.filieres.map(f => f.nom).join(' ')}`.toLowerCase();
+        const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
+        const schoolColor = schoolColors[ecole.id];
+        const filieresHtml = ecole.filieres.slice(0,4).map(f => `<li><span class="campus-filiere-text">${f.nom}</span></li>`).join('');
+        return `
             <a href="#${ecole.id}" class="campus-card" data-search="${searchData}">
                 <div class="campus-logo">${logoHtml}</div>
                 <h3 style="color: ${schoolColor};">${ecole.nom}</h3>
@@ -958,29 +950,21 @@ function renderAccueil() {
                 <ul>${filieresHtml}</ul>
             </a>
         `;
-    })
-    .join("");
+    }).join('');
 
-  const latestList = annalesDataAccueil
-    .map((annale) => {
-      const ecoleId =
-        annale.ecole === "ESG"
-          ? "esg"
-          : annale.ecole === "ISTA"
-          ? "ista"
-          : "isa";
-      const schoolColor = schoolColors[ecoleId];
-      return `
+    const latestList = annalesDataAccueil.map(annale => {
+        const ecoleId = annale.ecole === "ESG" ? "esg" : annale.ecole === "ISTA" ? "ista" : "isa";
+        const schoolColor = schoolColors[ecoleId];
+        return `
             <li>
                 <span class="latest-badge" style="background: ${schoolColor};">${annale.ecole}</span>
                 <span class="latest-title"><a href="${annale.lien}">${annale.titre}</a></span>
                 <span class="latest-meta">${annale.date}</span>
             </li>
         `;
-    })
-    .join("");
+    }).join('');
 
-  return `
+    return `
         <section class="hero">
             <div class="container">
                 <h2>Révisez avec les annales des examens</h2>
@@ -1060,7 +1044,7 @@ function hexToRgba(hex, opacity) {
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
-// Vue Niveau (toutes les matières sous forme de cartes avec image personnalisée)
+// Vue Niveau
 function renderNiveau(ecoleId, specialiteId, niveauId) {
   const ecole = ecoleDetails[ecoleId];
   if (!ecole) return renderAccueil();
@@ -1312,15 +1296,77 @@ function renderLogin() {
             <p>Veuillez vous connecter pour accéder aux annales.</p>
             <div class="login-form">
                 <input type="text" id="login-nom" placeholder="Nom" class="login-input">
-                <input type="text" id="login-matricule" placeholder="Matricule" class="login-input">
+                <input type="text" id="login-matricule" placeholder="Matricule (10 caractères, 4ème lettre)" class="login-input">
                 <div id="login-error" class="login-error"></div>
                 <button id="login-btn" class="login-btn">Se connecter</button>
             </div>
             <div class="login-footer-text">
-                <p>En vous connectant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a>.</p>
+                <p>En vous connectant, vous acceptez nos <a href="#conditions">Conditions d'utilisation</a> et notre <a href="#privacy">Politique de confidentialité</a>.</p>
             </div>
         </section>
     `;
+}
+
+// Vue Conditions d'utilisation
+function renderConditions() {
+  return `
+    <section class="section">
+      <h2>📜 Conditions d'utilisation</h2>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p>Bienvenue sur la Banque d'Annales IUG. En accédant à ce site, vous acceptez les présentes conditions générales d'utilisation.</p>
+        <h3>1. Objet</h3>
+        <p>La plateforme a pour objet de mettre à disposition des étudiants les annales des examens des années précédentes, à titre gratuit et pédagogique.</p>
+        <h3>2. Propriété intellectuelle</h3>
+        <p>Les documents mis en ligne sont la propriété de leurs auteurs respectifs (enseignants, établissements). Leur reproduction et diffusion sont strictement limitées à un usage personnel et non commercial.</p>
+        <h3>3. Responsabilité</h3>
+        <p>Les informations fournies le sont à titre indicatif. La Banque d'Annales IUG ne saurait être tenue responsable d'éventuelles erreurs ou omissions.</p>
+        <p>Dernière mise à jour : mars 2026.</p>
+        <p><a href="#accueil" class="btn-campus">← Retour à l'accueil</a></p>
+      </div>
+    </section>
+  `;
+}
+
+// Vue Politique de confidentialité
+function renderPrivacy() {
+  return `
+    <section class="section">
+      <h2>🔒 Politique de confidentialité</h2>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p>La protection de vos données personnelles est importante pour nous.</p>
+        <h3>1. Données collectées</h3>
+        <p>Nous collectons uniquement votre nom et votre matricule lors de la connexion, afin de personnaliser votre expérience. Ces données ne sont pas partagées avec des tiers.</p>
+        <h3>2. Cookies</h3>
+        <p>Le site utilise des cookies techniques pour maintenir votre session. Vous pouvez les désactiver via les paramètres de votre navigateur.</p>
+        <h3>3. Sécurité</h3>
+        <p>Les informations sont stockées localement sur votre navigateur (sessionStorage) et ne sont pas transmises à un serveur externe.</p>
+        <p>Dernière mise à jour : mars 2026.</p>
+        <p><a href="#accueil" class="btn-campus">← Retour à l'accueil</a></p>
+      </div>
+    </section>
+  `;
+}
+
+// Vue Mentions légales
+function renderMentions() {
+  return `
+    <section class="section">
+      <h2>⚖️ Mentions légales</h2>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h3>Éditeur</h3>
+        <p>Banque d'Annales IUG<br>
+        Institut Universitaire du Golfe<br>
+        contact@annales-iug.com</p>
+        <h3>Directeur de publication</h3>
+        <p>MABEL CEDRIC YVAN</p>
+        <h3>Hébergement</h3>
+        <p>Ce site est hébergé localement (fichiers statiques).</p>
+        <h3>Propriété intellectuelle</h3>
+        <p>Les contenus sont protégés par le droit d'auteur. Toute reproduction non autorisée est interdite.</p>
+        <p><a href="#accueil" class="btn-campus">← Retour à l'accueil</a></p>
+      </div>
+    </section>
+  `;
 }
 
 // ---------- FILTRES ----------
@@ -1414,7 +1460,6 @@ function initUpload() {
       };
       localStorage.setItem("uploaded_automatisme", JSON.stringify(data));
       alert("Fichier ajouté pour Automatisme !");
-      // Si on est sur la page automatisme, recharger
       if (window.location.hash.includes("automatisme")) {
         window.location.reload();
       }
@@ -1430,9 +1475,10 @@ function router() {
   const hash = window.location.hash.slice(1) || "login";
   const parts = hash.split("/").filter((p) => p.length > 0);
 
-  // Vérifier si l'utilisateur est connecté (sauf pour la page login)
+  // Vérifier si l'utilisateur est connecté (sauf pour login et les pages publiques)
   const user = getUser();
-  if (!user && hash !== "login") {
+  const publicPages = ["login", "conditions", "privacy", "mentions"];
+  if (!user && !publicPages.includes(hash) && !hash.startsWith("pdf/")) {
     window.location.hash = "login";
     return;
   }
@@ -1446,24 +1492,29 @@ function router() {
   } else if (hash === "login") {
     app.innerHTML = renderLogin();
     document.title = "Connexion - Banque d'Annales IUG";
-    // Ajout des gestionnaires pour le formulaire de connexion
     document.getElementById("login-btn")?.addEventListener("click", () => {
       const nom = document.getElementById("login-nom").value.trim();
       const matricule = document.getElementById("login-matricule").value.trim();
       const errorDiv = document.getElementById("login-error");
-
-      // Validation du matricule
       const matriculeRegex = /^\d{3}[A-Za-z]\d{6}$/;
       if (nom === "" || matricule === "") {
         errorDiv.textContent = "Veuillez remplir tous les champs.";
       } else if (!matriculeRegex.test(matricule)) {
-        errorDiv.textContent = "Matricule incorrect.";
+        errorDiv.textContent = "Le matricule doit faire 10 caractères : les 3 premiers chiffres, le 4ème une lettre, les 6 derniers chiffres.";
       } else {
-        // Connexion réussie
         setUser({ nom, matricule });
         window.location.hash = "accueil";
       }
     });
+  } else if (hash === "conditions") {
+    app.innerHTML = renderConditions();
+    document.title = "Conditions d'utilisation - Banque d'Annales IUG";
+  } else if (hash === "privacy") {
+    app.innerHTML = renderPrivacy();
+    document.title = "Politique de confidentialité - Banque d'Annales IUG";
+  } else if (hash === "mentions") {
+    app.innerHTML = renderMentions();
+    document.title = "Mentions légales - Banque d'Annales IUG";
   } else if (parts.length >= 2 && parts[0] === "pdf") {
     if (parts[1] === "uploaded" && parts[2] === "automatisme") {
       const data = localStorage.getItem("uploaded_automatisme");
@@ -1500,23 +1551,17 @@ function router() {
       app.innerHTML = renderMatiere(eId, sId, nId, mId);
       document.title = `Matière - Banque d'Annales IUG`;
       initMatiereFilters();
-      // Ajouter gestionnaire pour supprimer le fichier uploadé
       const deleteBtn = document.getElementById("delete-upload-btn");
       if (deleteBtn) {
         deleteBtn.addEventListener("click", () => {
           localStorage.removeItem("uploaded_automatisme");
-          // Recharger la même route
           window.location.hash = hash;
         });
       }
     } else window.location.hash = "accueil";
   } else window.location.hash = "accueil";
 
-  // Forcer le défilement en haut de la page à chaque changement de route
-  window.scrollTo({
-    top: 0,
-    behavior: "auto"
-  });
+  window.scrollTo({ top: 0, behavior: "auto" });
 
   document.querySelectorAll(".nav-link").forEach((link) => {
     const linkHash = link.getAttribute("href").slice(1);
@@ -1533,14 +1578,12 @@ function router() {
   const input = document.getElementById("search-input");
   if (input) filterContent(input.value.toLowerCase().trim());
 
-  // Mise à jour du statut de connexion dans le header
   updateUserStatus();
 
-  // ---------- BOUTON RETOUR EN HAUT : MISE À JOUR DE LA COULEUR ----------
   const scrollBtn = document.getElementById("scrollToTop");
   if (scrollBtn) {
     let color;
-    if (hash === "accueil" || hash === "contact" || hash === "login") {
+    if (hash === "accueil" || hash === "contact" || hash === "login" || publicPages.includes(hash)) {
       color = schoolColors.default;
     } else if (parts[0] === "pdf") {
       color = schoolColors.default;
@@ -1571,7 +1614,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// ---------- BOUTON RETOUR EN HAUT : LOGIQUE D'AFFICHAGE ----------
+// ---------- BOUTON RETOUR EN HAUT ----------
 const scrollToTopBtn = document.getElementById("scrollToTop");
 if (scrollToTopBtn) {
   function toggleScrollToTop() {
@@ -1581,15 +1624,10 @@ if (scrollToTopBtn) {
       scrollToTopBtn.classList.remove("visible");
     }
   }
-
   window.addEventListener("scroll", toggleScrollToTop);
-  toggleScrollToTop(); // Vérifie l'état initial
-
+  toggleScrollToTop();
   scrollToTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 

@@ -937,7 +937,7 @@ function updateUserStatus() {
 
 // ---------- FONCTIONS DE RENDU ----------
 
-// Vue Accueil (avec carrousel d'images)
+// Vue Accueil (sans carrousel, avec le texte simple)
 function renderAccueil() {
     const ecoleCards = ecoleData.map(ecole => {
         const searchData = `${ecole.nom} ${ecole.description} ${ecole.filieres.map(f => f.nom).join(' ')}`.toLowerCase();
@@ -967,22 +967,10 @@ function renderAccueil() {
     }).join('');
 
     return `
-        <section class="hero-carousel">
-            <div class="carousel-track">
-                <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Étudiants">
-                <img src="https://images.pexels.com/photos/159775/library-la-trobe-study-students-159775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bibliothèque">
-                <img src="https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Examen">
-                <img src="https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Maths">
-                <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Étudiants">
-                <img src="https://images.pexels.com/photos/159775/library-la-trobe-study-students-159775.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bibliothèque">
-                <img src="https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Examen">
-                <img src="https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Maths">
-            </div>
-            <div class="hero-overlay">
-                <div class="container">
-                    <h2>Révisez avec les annales des examens</h2>
-                    <p>Retrouvez tous les sujets et corrigés des années précédentes, classés par école, filière et niveau.</p>
-                </div>
+        <section class="hero">
+            <div class="container">
+                <h2>Révisez avec les annales des examens</h2>
+                <p>Retrouvez tous les sujets et corrigés des années précédentes, classés par école, filière et niveau.</p>
             </div>
         </section>
         <section class="section"><h2>🏛️ Choisissez votre école</h2><div class="campus-grid">${ecoleCards}</div></section>
@@ -1227,9 +1215,9 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
     .join("");
 
   // Vérifier si c'est la matière automatisme et si un fichier est uploadé
-  let uploadedHtml = '';
-  if (matiereId === 'automatisme') {
-    const uploaded = localStorage.getItem('uploaded_automatisme');
+  let uploadedHtml = "";
+  if (matiereId === "automatisme") {
+    const uploaded = localStorage.getItem("uploaded_automatisme");
     if (uploaded) {
       const data = JSON.parse(uploaded);
       uploadedHtml = `
@@ -1380,66 +1368,44 @@ function filterContent(term) {
   });
 }
 
-// ---------- CARROUSEL ----------
-let carouselInterval = null;
-
-function initCarousel() {
-  const track = document.querySelector('.carousel-track');
-  if (!track) return;
-  const images = track.children;
-  if (images.length === 0) return;
-  
-  let currentIndex = 0;
-  
-  // Fonction pour passer à l'image suivante
-  const nextImage = () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    track.style.transition = 'transform 0.5s ease';
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  };
-  
-  // Démarrer l'intervalle
-  carouselInterval = setInterval(nextImage, 2000);
-}
-
 // ---------- UPLOAD ----------
 function initUpload() {
-    const uploadBtn = document.getElementById('upload-automatisme-btn');
-    if (!uploadBtn) return;
-    
-    // Créer un input file caché
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = '*/*';
-    fileInput.style.display = 'none';
-    document.body.appendChild(fileInput);
-    
-    uploadBtn.addEventListener('click', () => {
-        fileInput.click();
-    });
-    
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const base64 = e.target.result;
-            const data = {
-                name: file.name,
-                content: base64,
-                type: file.type,
-                size: file.size
-            };
-            localStorage.setItem('uploaded_automatisme', JSON.stringify(data));
-            alert('Fichier ajouté pour Automatisme !');
-            // Si on est sur la page automatisme, recharger
-            if (window.location.hash.includes('automatisme')) {
-                window.location.reload();
-            }
-        };
-        reader.readAsDataURL(file);
-    });
+  const uploadBtn = document.getElementById("upload-automatisme-btn");
+  if (!uploadBtn) return;
+
+  // Créer un input file caché
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "*/*";
+  fileInput.style.display = "none";
+  document.body.appendChild(fileInput);
+
+  uploadBtn.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const base64 = e.target.result;
+      const data = {
+        name: file.name,
+        content: base64,
+        type: file.type,
+        size: file.size
+      };
+      localStorage.setItem("uploaded_automatisme", JSON.stringify(data));
+      alert("Fichier ajouté pour Automatisme !");
+      // Si on est sur la page automatisme, recharger
+      if (window.location.hash.includes("automatisme")) {
+        window.location.reload();
+      }
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
 // ---------- ROUTAGE ----------
@@ -1450,10 +1416,8 @@ function router() {
   const parts = hash.split("/").filter((p) => p.length > 0);
 
   if (hash === "accueil") {
-    if (carouselInterval) clearInterval(carouselInterval);
     app.innerHTML = renderAccueil();
     document.title = "Accueil - Banque d'Annales IUG";
-    initCarousel();
   } else if (hash === "contact") {
     app.innerHTML = renderContact();
     document.title = "Contact - Banque d'Annales IUG";
@@ -1470,13 +1434,13 @@ function router() {
       window.location.hash = "accueil";
     });
   } else if (parts.length >= 2 && parts[0] === "pdf") {
-    if (parts[1] === 'uploaded' && parts[2] === 'automatisme') {
-      const data = localStorage.getItem('uploaded_automatisme');
+    if (parts[1] === "uploaded" && parts[2] === "automatisme") {
+      const data = localStorage.getItem("uploaded_automatisme");
       if (data) {
         app.innerHTML = renderUploadedPdf(data);
-        document.title = 'Document uploadé - Automatisme';
+        document.title = "Document uploadé - Automatisme";
       } else {
-        window.location.hash = 'accueil';
+        window.location.hash = "accueil";
       }
     } else {
       const filePath = parts.join("/");
@@ -1506,10 +1470,10 @@ function router() {
       document.title = `Matière - Banque d'Annales IUG`;
       initMatiereFilters();
       // Ajouter gestionnaire pour supprimer le fichier uploadé
-      const deleteBtn = document.getElementById('delete-upload-btn');
+      const deleteBtn = document.getElementById("delete-upload-btn");
       if (deleteBtn) {
-        deleteBtn.addEventListener('click', () => {
-          localStorage.removeItem('uploaded_automatisme');
+        deleteBtn.addEventListener("click", () => {
+          localStorage.removeItem("uploaded_automatisme");
           // Recharger la même route
           window.location.hash = hash;
         });

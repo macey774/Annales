@@ -911,7 +911,7 @@ function setUser(user) {
 // Déconnecte l'utilisateur
 function logout() {
   sessionStorage.removeItem("user");
-  window.location.hash = "accueil";
+  window.location.hash = "login";
 }
 
 // Met à jour l'affichage du statut de connexion dans le header
@@ -921,9 +921,7 @@ function updateUserStatus() {
   const user = getUser();
   if (user) {
     userStatusDiv.innerHTML = `
-            <span class="user-greeting">Bonjour, ${
-              user.role === "visiteur" ? "Visiteur" : "Étudiant"
-            }</span>
+            <span class="user-greeting">Bonjour, ${user.nom}</span>
             <button class="logout-btn" id="logout-btn">Déconnexion</button>
         `;
     document.getElementById("logout-btn")?.addEventListener("click", (e) => {
@@ -939,12 +937,20 @@ function updateUserStatus() {
 
 // Vue Accueil (sans carrousel, avec le texte simple)
 function renderAccueil() {
-    const ecoleCards = ecoleData.map(ecole => {
-        const searchData = `${ecole.nom} ${ecole.description} ${ecole.filieres.map(f => f.nom).join(' ')}`.toLowerCase();
-        const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
-        const schoolColor = schoolColors[ecole.id];
-        const filieresHtml = ecole.filieres.slice(0,4).map(f => `<li><span class="campus-filiere-text">${f.nom}</span></li>`).join('');
-        return `
+  const ecoleCards = ecoleData
+    .map((ecole) => {
+      const searchData = `${ecole.nom} ${
+        ecole.description
+      } ${ecole.filieres.map((f) => f.nom).join(" ")}`.toLowerCase();
+      const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
+      const schoolColor = schoolColors[ecole.id];
+      const filieresHtml = ecole.filieres
+        .slice(0, 4)
+        .map(
+          (f) => `<li><span class="campus-filiere-text">${f.nom}</span></li>`
+        )
+        .join("");
+      return `
             <a href="#${ecole.id}" class="campus-card" data-search="${searchData}">
                 <div class="campus-logo">${logoHtml}</div>
                 <h3 style="color: ${schoolColor};">${ecole.nom}</h3>
@@ -952,21 +958,29 @@ function renderAccueil() {
                 <ul>${filieresHtml}</ul>
             </a>
         `;
-    }).join('');
+    })
+    .join("");
 
-    const latestList = annalesDataAccueil.map(annale => {
-        const ecoleId = annale.ecole === "ESG" ? "esg" : annale.ecole === "ISTA" ? "ista" : "isa";
-        const schoolColor = schoolColors[ecoleId];
-        return `
+  const latestList = annalesDataAccueil
+    .map((annale) => {
+      const ecoleId =
+        annale.ecole === "ESG"
+          ? "esg"
+          : annale.ecole === "ISTA"
+          ? "ista"
+          : "isa";
+      const schoolColor = schoolColors[ecoleId];
+      return `
             <li>
                 <span class="latest-badge" style="background: ${schoolColor};">${annale.ecole}</span>
                 <span class="latest-title"><a href="${annale.lien}">${annale.titre}</a></span>
                 <span class="latest-meta">${annale.date}</span>
             </li>
         `;
-    }).join('');
+    })
+    .join("");
 
-    return `
+  return `
         <section class="hero">
             <div class="container">
                 <h2>Révisez avec les annales des examens</h2>
@@ -1295,12 +1309,13 @@ function renderLogin() {
   return `
         <section class="section login-section">
             <h2>🔐 Connexion</h2>
-            <p>Choisissez votre mode de connexion :</p>
-            <div class="login-options">
-                <button class="login-btn student-btn" id="student-login">👨‍🎓 Étudiant</button>
-                <button class="login-btn visitor-btn" id="visitor-login">👤 Visiteur</button>
+            <p>Veuillez vous connecter pour accéder aux annales.</p>
+            <div class="login-form">
+                <input type="text" id="login-nom" placeholder="Nom" class="login-input">
+                <input type="text" id="login-matricule" placeholder="Matricule" class="login-input">
+                <div id="login-error" class="login-error"></div>
+                <button id="login-btn" class="login-btn">Se connecter</button>
             </div>
-            <a href="#accueil" class="back-link">← Retour à l'accueil</a>
             <div class="login-footer-text">
                 <p>En vous connectant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a>.</p>
             </div>
@@ -1412,8 +1427,15 @@ function initUpload() {
 
 const app = document.getElementById("app");
 function router() {
-  const hash = window.location.hash.slice(1) || "accueil";
+  const hash = window.location.hash.slice(1) || "login";
   const parts = hash.split("/").filter((p) => p.length > 0);
+
+  // Vérifier si l'utilisateur est connecté (sauf pour la page login)
+  const user = getUser();
+  if (!user && hash !== "login") {
+    window.location.hash = "login";
+    return;
+  }
 
   if (hash === "accueil") {
     app.innerHTML = renderAccueil();
@@ -1424,14 +1446,23 @@ function router() {
   } else if (hash === "login") {
     app.innerHTML = renderLogin();
     document.title = "Connexion - Banque d'Annales IUG";
-    // Ajout des gestionnaires pour les boutons de connexion
-    document.getElementById("student-login")?.addEventListener("click", () => {
-      setUser({ role: "etudiant" });
-      window.location.hash = "accueil";
-    });
-    document.getElementById("visitor-login")?.addEventListener("click", () => {
-      setUser({ role: "visiteur" });
-      window.location.hash = "accueil";
+    // Ajout des gestionnaires pour le formulaire de connexion
+    document.getElementById("login-btn")?.addEventListener("click", () => {
+      const nom = document.getElementById("login-nom").value.trim();
+      const matricule = document.getElementById("login-matricule").value.trim();
+      const errorDiv = document.getElementById("login-error");
+
+      // Validation du matricule
+      const matriculeRegex = /^\d{3}[A-Za-z]\d{6}$/;
+      if (nom === "" || matricule === "") {
+        errorDiv.textContent = "Veuillez remplir tous les champs.";
+      } else if (!matriculeRegex.test(matricule)) {
+        errorDiv.textContent = "Matricule incorrect.";
+      } else {
+        // Connexion réussie
+        setUser({ nom, matricule });
+        window.location.hash = "accueil";
+      }
     });
   } else if (parts.length >= 2 && parts[0] === "pdf") {
     if (parts[1] === "uploaded" && parts[2] === "automatisme") {

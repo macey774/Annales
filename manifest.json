@@ -1,0 +1,23 @@
+{
+  "id": "/",
+  "name": "Banque d'Annales IUG",
+  "short_name": "Annales IUG",
+  "description": "Révisez avec les annales des examens de l'IUG",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b2b40",
+  "theme_color": "#2e7d32",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

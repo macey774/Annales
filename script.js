@@ -349,30 +349,31 @@ const ecoleData = [
   }
 ];
 
+// Données pour les dernières annales : chaque objet contient école, filière, matière, lien
 const annalesDataAccueil = [
   {
     ecole: "ESG",
-    titre: "Comptabilité - BTS 2024 (normale)",
-    date: "il y a 3 jours",
-    lien: "#"
+    filiere: "Comptabilité",
+    matiere: "Mathématiques",
+    lien: "pdf/Cours-Thales-ANNALES-MATHS-Sujet-et-corrige-2022.pdf"
   },
   {
     ecole: "ISTA",
-    titre: "Informatique - BTS 2023 (spéciale)",
-    date: "il y a 1 semaine",
-    lien: "#"
+    filiere: "Informatique",
+    matiere: "Algorithmique",
+    lien: "pdf/Cours-Thales-ANNALES-MATHS-Sujet-et-corrige-2022.pdf"
   },
   {
     ecole: "ESG",
-    titre: "Gestion - BTS 2022 (normale)",
-    date: "il y a 2 semaines",
-    lien: "#"
+    filiere: "Gestion",
+    matiere: "Economie",
+    lien: "pdf/Cours-Thales-ANNALES-MATHS-Sujet-et-corrige-2022.pdf"
   },
   {
     ecole: "ISA",
-    titre: "Soins infirmiers - BTS 2024 (normale)",
-    date: "il y a 3 semaines",
-    lien: "#"
+    filiere: "Soins infirmiers",
+    matiere: "Anatomie",
+    lien: "pdf/Cours-Thales-ANNALES-MATHS-Sujet-et-corrige-2022.pdf"
   }
 ];
 
@@ -958,8 +959,8 @@ function renderAccueil() {
         return `
             <li>
                 <span class="latest-badge" style="background: ${schoolColor};">${annale.ecole}</span>
-                <span class="latest-title"><a href="${annale.lien}">${annale.titre}</a></span>
-                <span class="latest-meta">${annale.date}</span>
+                <span class="latest-title"><a href="#${annale.lien}">${annale.filiere} (${annale.matiere})</a></span>
+                <span class="latest-meta">${annale.date || "récent"}</span>
             </li>
         `;
     }).join('');
@@ -1503,7 +1504,8 @@ function router() {
         errorDiv.textContent = "Le matricule doit faire 10 caractères : les 3 premiers chiffres, le 4ème une lettre, les 6 derniers chiffres.";
       } else {
         setUser({ nom, matricule });
-        window.location.hash = "accueil";
+        // Remplacer l'état actuel (login) par accueil pour éviter le retour en arrière
+        window.location.replace("#accueil");
       }
     });
   } else if (hash === "conditions") {

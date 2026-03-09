@@ -349,7 +349,7 @@ const ecoleData = [
   }
 ];
 
-// Données pour les dernières annales : chaque objet contient école, filière, matière, lien
+// Données pour les dernières annales
 const annalesDataAccueil = [
   {
     ecole: "ESG",
@@ -377,12 +377,10 @@ const annalesDataAccueil = [
   }
 ];
 
-// Données pour chaque école (spécialités, niveaux, matières, annales)
-// Pour cet exemple, nous allons remplacer tous les liens "#" des sujets et corrigés par le chemin vers le PDF fourni.
-// Dans une application réelle, chaque annale aurait son propre fichier.
+// Chemin de base pour les PDF (pour les annales génériques)
 const pdfBasePath = "pdf/Cours-Thales-ANNALES-MATHS-Sujet-et-corrige-2022.pdf";
 
-// Fonction pour mettre à jour les annales avec le chemin PDF
+// Fonction pour mettre à jour les annales avec le chemin PDF (utilisée pour les données génériques)
 function updateAnnalesWithPdf(obj) {
   if (Array.isArray(obj)) {
     obj.forEach((item) => updateAnnalesWithPdf(item));
@@ -590,114 +588,49 @@ const ecoleDetails = {
                   id: "anglais",
                   nom: "Anglais",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "spéciale",
-                      sujet: "#",
-                      corrige: null
-                    },
-                    {
-                      annee: 2022,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null },
+                    { annee: 2022, session: "normale", sujet: "#", corrige: "#" }
                   ]
                 },
                 {
                   id: "automatisme",
                   nom: "Automatisme",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                   ]
                 },
                 {
                   id: "commande-par-ordinateur",
                   nom: "Commande par ordinateur",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "spéciale",
-                      sujet: "#",
-                      corrige: null
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
                   ]
                 },
                 {
                   id: "comptabilite",
                   nom: "Comptabilité",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                   ]
                 },
                 {
                   id: "droit",
                   nom: "Droit",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "spéciale",
-                      sujet: "#",
-                      corrige: null
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
                   ]
                 },
                 {
                   id: "electronique-de-base",
                   nom: "Electronique de base",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                   ]
                 }
               ]
@@ -710,108 +643,50 @@ const ecoleDetails = {
                   id: "electronique-de-puissance",
                   nom: "Electronique de puissance",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "spéciale",
-                      sujet: "#",
-                      corrige: null
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null },
+                    // Ajout de la nouvelle annale pour 2022 avec le PDF "TD CHAPITRE 1.pdf"
+                    { annee: 2022, session: "normale", sujet: "TD%20CHAPITRE%201.pdf", corrige: null }
                   ]
                 },
                 {
                   id: "francais",
                   nom: "Français",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                   ]
                 },
                 {
                   id: "mathematiques",
                   nom: "Mathématiques",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                   ]
                 },
                 {
                   id: "metrologie",
                   nom: "Métrologie",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "spéciale",
-                      sujet: "#",
-                      corrige: null
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
                   ]
                 },
                 {
                   id: "microprocesseur",
                   nom: "Microprocesseur",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
                   ]
                 },
                 {
                   id: "regulation-et-asservissement",
                   nom: "Régulation et Asservissement",
                   annales: [
-                    {
-                      annee: 2024,
-                      session: "normale",
-                      sujet: "#",
-                      corrige: "#"
-                    },
-                    {
-                      annee: 2023,
-                      session: "spéciale",
-                      sujet: "#",
-                      corrige: null
-                    }
+                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
+                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
                   ]
                 }
               ]
@@ -893,7 +768,7 @@ const ecoleDetails = {
   }
 };
 
-// Remplacer tous les "#" par le chemin du PDF
+// Remplacer tous les "#" par le chemin du PDF (pour les annales génériques)
 updateAnnalesWithPdf(ecoleDetails);
 
 // ---------- GESTION DE LA CONNEXION ----------
@@ -1243,8 +1118,9 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
     `;
 }
 
-// Vue PDF pour les fichiers standards
+// Vue PDF pour les fichiers standards (dans le dossier pdf/ ou à la racine)
 function renderPdf(filePath) {
+  // Si le chemin ne commence pas par 'pdf/' et ne contient pas de slash, on suppose qu'il est à la racine
   const fullPath = filePath;
   return `
         <div class="pdf-viewer" style="padding: 1rem;">
@@ -1479,7 +1355,7 @@ function router() {
   // Vérifier si l'utilisateur est connecté (sauf pour login et les pages publiques)
   const user = getUser();
   const publicPages = ["login", "conditions", "privacy", "mentions"];
-  if (!user && !publicPages.includes(hash) && !hash.startsWith("pdf/")) {
+  if (!user && !publicPages.includes(hash) && !hash.startsWith("pdf/") && !hash.endsWith('.pdf')) {
     window.location.hash = "login";
     return;
   }
@@ -1531,6 +1407,10 @@ function router() {
       app.innerHTML = renderPdf(filePath);
       document.title = "Document - Banque d'Annales IUG";
     }
+  } else if (parts.length === 1 && parts[0].endsWith('.pdf')) {
+    // Fichier PDF à la racine (ex: TD%20CHAPITRE%201.pdf)
+    app.innerHTML = renderPdf(parts[0]);
+    document.title = "Document - Banque d'Annales IUG";
   } else if (parts.length === 1 && ["esg", "ista", "isa"].includes(parts[0])) {
     app.innerHTML = renderEcole(parts[0]);
     document.title = `${parts[0].toUpperCase()} - Banque d'Annales IUG`;
@@ -1587,7 +1467,7 @@ function router() {
     let color;
     if (hash === "accueil" || hash === "contact" || hash === "login" || publicPages.includes(hash)) {
       color = schoolColors.default;
-    } else if (parts[0] === "pdf") {
+    } else if (parts[0] === "pdf" || parts[0].endsWith('.pdf')) {
       color = schoolColors.default;
     } else {
       const ecoleId = parts[0];

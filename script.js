@@ -1124,9 +1124,8 @@ function renderPdf(filePath) {
   const fullPath = filePath;
   return `
         <div class="pdf-viewer" style="padding: 1rem;">
-            <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="margin-bottom: 1rem;">
                 <a href="javascript:history.back()" class="btn-campus">← Retour</a>
-                <a href="${fullPath}" download class="btn-campus" style="background: var(--primary);">⬇️ Télécharger</a>
             </div>
             <iframe src="${fullPath}" width="100%" height="600px" style="border: none; border-radius: var(--radius-lg); box-shadow: var(--shadow);"></iframe>
             <p style="text-align: center; margin-top: 1rem;">Si le PDF ne s'affiche pas, <a href="${fullPath}" target="_blank">cliquez ici pour l'ouvrir</a>.</p>
@@ -1139,9 +1138,8 @@ function renderUploadedPdf(data) {
   const fileData = JSON.parse(data);
   return `
         <div class="pdf-viewer" style="padding: 1rem;">
-            <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="margin-bottom: 1rem;">
                 <a href="javascript:history.back()" class="btn-campus">← Retour</a>
-                <a href="${fileData.content}" download="${fileData.name}" class="btn-campus" style="background: var(--primary);">⬇️ Télécharger</a>
             </div>
             <iframe src="${fileData.content}" width="100%" height="600px" style="border: none; border-radius: var(--radius-lg); box-shadow: var(--shadow);"></iframe>
             <p style="text-align: center; margin-top: 1rem;">Si le PDF ne s'affiche pas, <a href="${fileData.content}" target="_blank">cliquez ici pour l'ouvrir</a>.</p>
@@ -1345,6 +1343,43 @@ function initUpload() {
   });
 }
 
+// ---------- GESTION DU BOUTON RETOUR (DOUBLE CLIC POUR QUITTER) ----------
+let backPressCount = 0;
+let backPressTimer;
+
+function handleBackButton() {
+  const currentHash = window.location.hash.slice(1) || "login";
+  // Uniquement sur la page d'accueil
+  if (currentHash === "accueil") {
+    if (backPressCount === 0) {
+      backPressCount = 1;
+      // Afficher un message personnalisé (popup)
+      alert("Appuyez à nouveau sur le bouton retour pour quitter l'application.");
+      // Réinitialiser après 2 secondes
+      backPressTimer = setTimeout(() => {
+        backPressCount = 0;
+      }, 2000);
+    } else {
+      clearTimeout(backPressTimer);
+      backPressCount = 0;
+      // Permettre la sortie
+      window.close(); // Ne fonctionne que si la fenêtre a été ouverte par script, sinon on peut rediriger vers une page blanche ou about:blank
+      // Alternative : rediriger vers une page de déconnexion ou simplement quitter
+      window.location.href = "about:blank";
+    }
+  }
+}
+
+// Intercepter l'événement popstate (retour)
+window.addEventListener("popstate", handleBackButton);
+
+// On push un état factice pour que le bouton retour soit actif même si on est à l'accueil
+// (optionnel, car l'historique est déjà géré par le routeur)
+// Pour s'assurer que le retour fonctionne, on peut ajouter un état initial
+if (window.location.hash === "#accueil") {
+  history.pushState({ page: "accueil" }, null, "#accueil");
+}
+
 // ---------- ROUTAGE ----------
 
 const app = document.getElementById("app");
@@ -1363,6 +1398,8 @@ function router() {
   if (hash === "accueil") {
     app.innerHTML = renderAccueil();
     document.title = "Accueil - Banque d'Annales IUG";
+    // Ajouter un état dans l'historique pour gérer le retour
+    history.pushState({ page: "accueil" }, null, "#accueil");
   } else if (hash === "contact") {
     app.innerHTML = renderContact();
     document.title = "Contact - Banque d'Annales IUG";

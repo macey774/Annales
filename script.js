@@ -645,7 +645,6 @@ const ecoleDetails = {
                   annales: [
                     { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
                     { annee: 2023, session: "spéciale", sujet: "#", corrige: null },
-                    // Ajout de la nouvelle annale pour 2022 avec le PDF "TD CHAPITRE 1.pdf"
                     { annee: 2022, session: "normale", sujet: "TD%20CHAPITRE%201.pdf", corrige: null }
                   ]
                 },
@@ -1120,7 +1119,6 @@ function renderMatiere(ecoleId, specialiteId, niveauId, matiereId) {
 
 // Vue PDF pour les fichiers standards (dans le dossier pdf/ ou à la racine)
 function renderPdf(filePath) {
-  // Si le chemin ne commence pas par 'pdf/' et ne contient pas de slash, on suppose qu'il est à la racine
   const fullPath = filePath;
   return `
         <div class="pdf-viewer" style="padding: 1rem;">
@@ -1309,7 +1307,6 @@ function initUpload() {
   const uploadBtn = document.getElementById("upload-automatisme-btn");
   if (!uploadBtn) return;
 
-  // Créer un input file caché
   const fileInput = document.createElement("input");
   fileInput.type = "file";
   fileInput.accept = "*/*";
@@ -1343,41 +1340,90 @@ function initUpload() {
   });
 }
 
-// ---------- GESTION DU BOUTON RETOUR (DOUBLE CLIC POUR QUITTER) ----------
-let backPressCount = 0;
-let backPressTimer;
+// ---------- GESTION DU BOUTON RETOUR (DOUBLE APPUI POUR QUITTER) ----------
+let backPressedOnce = false;
+let backTimer;
 
+// Fonction appelée lors de l'événement popstate (retour)
 function handleBackButton() {
   const currentHash = window.location.hash.slice(1) || "login";
+  
   // Uniquement sur la page d'accueil
   if (currentHash === "accueil") {
-    if (backPressCount === 0) {
-      backPressCount = 1;
-      // Afficher un message personnalisé (popup)
+    if (!backPressedOnce) {
+      // Premier appui
+      backPressedOnce = true;
       alert("Appuyez à nouveau sur le bouton retour pour quitter l'application.");
+      
       // Réinitialiser après 2 secondes
-      backPressTimer = setTimeout(() => {
-        backPressCount = 0;
+      backTimer = setTimeout(() => {
+        backPressedOnce = false;
       }, 2000);
+      
+      // On push un état factice pour que le retour fonctionne
+      history.pushState({}, null, "#accueil");
     } else {
-      clearTimeout(backPressTimer);
-      backPressCount = 0;
-      // Permettre la sortie
-      window.close(); // Ne fonctionne que si la fenêtre a été ouverte par script, sinon on peut rediriger vers une page blanche ou about:blank
-      // Alternative : rediriger vers une page de déconnexion ou simplement quitter
+      // Deuxième appui consécutif
+      clearTimeout(backTimer);
+      backPressedOnce = false;
+      // Quitter l'application
+      window.close(); // Peut ne pas fonctionner si la fenêtre n'a pas été ouverte par script
+      // Alternative : rediriger vers une page vide
       window.location.href = "about:blank";
     }
+  } else {
+    // Sur les autres pages, on laisse le comportement normal
+    // On réinitialise le compteur au cas où
+    backPressedOnce = false;
+    clearTimeout(backTimer);
   }
 }
 
-// Intercepter l'événement popstate (retour)
+// Écouter l'événement popstate
 window.addEventListener("popstate", handleBackButton);
 
-// On push un état factice pour que le bouton retour soit actif même si on est à l'accueil
-// (optionnel, car l'historique est déjà géré par le routeur)
-// Pour s'assurer que le retour fonctionne, on peut ajouter un état initial
+// Au chargement, si on est sur accueil, on s'assure d'avoir un état dans l'historique
 if (window.location.hash === "#accueil") {
-  history.pushState({ page: "accueil" }, null, "#accueil");
+  history.pushState({}, null, "#accueil");
+}
+
+// ---------- PROTECTION ANTI-CAPTURE D'ÉCRAN (dissuasion) ----------
+// On ajoute une classe CSS qui empêche la sélection et on écoute les événements
+document.addEventListener('contextmenu', (e) => e.preventDefault()); // Empêche clic droit
+document.addEventListener('keydown', (e) => {
+  // Empêche certaines combinaisons de touches courantes
+  if (e.key === 'PrintScreen') {
+    e.preventDefault();
+    alert('Les captures d\'écran ne sont pas autorisées.');
+  }
+  // Empêche Ctrl+P (imprimer) et Ctrl+S (sauvegarder)
+  if ((e.ctrlKey && (e.key === 'p' || e.key === 's')) || (e.metaKey && (e.key === 'p' || e.key === 's'))) {
+    e.preventDefault();
+    alert('Action non autorisée.');
+  }
+});
+
+// Détection de la perte de focus (peut indiquer une capture)
+let hidden, visibilityChange;
+if (typeof document.hidden !== "undefined") {
+  hidden = "hidden";
+  visibilityChange = "visibilitychange";
+} else if (typeof document.msHidden !== "undefined") {
+  hidden = "msHidden";
+  visibilityChange = "msvisibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+  hidden = "webkitHidden";
+  visibilityChange = "webkitvisibilitychange";
+}
+
+if (visibilityChange) {
+  document.addEventListener(visibilityChange, () => {
+    if (document[hidden]) {
+      // L'onglet est caché (possible capture)
+      // On peut afficher un message ou simplement logger
+      console.log("L'application n'est plus visible");
+    }
+  }, false);
 }
 
 // ---------- ROUTAGE ----------
@@ -1417,7 +1463,6 @@ function router() {
         errorDiv.textContent = "Le matricule doit faire 10 caractères : les 3 premiers chiffres, le 4ème une lettre, les 6 derniers chiffres.";
       } else {
         setUser({ nom, matricule });
-        // Remplacer l'état actuel (login) par accueil pour éviter le retour en arrière
         window.location.replace("#accueil");
       }
     });
@@ -1445,7 +1490,6 @@ function router() {
       document.title = "Document - Banque d'Annales IUG";
     }
   } else if (parts.length === 1 && parts[0].endsWith('.pdf')) {
-    // Fichier PDF à la racine (ex: TD%20CHAPITRE%201.pdf)
     app.innerHTML = renderPdf(parts[0]);
     document.title = "Document - Banque d'Annales IUG";
   } else if (parts.length === 1 && ["esg", "ista", "isa"].includes(parts[0])) {

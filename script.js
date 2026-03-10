@@ -588,49 +588,114 @@ const ecoleDetails = {
                   id: "anglais",
                   nom: "Anglais",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null },
-                    { annee: 2022, session: "normale", sujet: "#", corrige: "#" }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "spéciale",
+                      sujet: "#",
+                      corrige: null
+                    },
+                    {
+                      annee: 2022,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    }
                   ]
                 },
                 {
                   id: "automatisme",
                   nom: "Automatisme",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    }
                   ]
                 },
                 {
                   id: "commande-par-ordinateur",
                   nom: "Commande par ordinateur",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "spéciale",
+                      sujet: "#",
+                      corrige: null
+                    }
                   ]
                 },
                 {
                   id: "comptabilite",
                   nom: "Comptabilité",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    }
                   ]
                 },
                 {
                   id: "droit",
                   nom: "Droit",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "spéciale",
+                      sujet: "#",
+                      corrige: null
+                    }
                   ]
                 },
                 {
                   id: "electronique-de-base",
                   nom: "Electronique de base",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    }
                   ]
                 }
               ]
@@ -643,49 +708,114 @@ const ecoleDetails = {
                   id: "electronique-de-puissance",
                   nom: "Electronique de puissance",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null },
-                    { annee: 2022, session: "normale", sujet: "TD%20CHAPITRE%201.pdf", corrige: null }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "spéciale",
+                      sujet: "#",
+                      corrige: null
+                    },
+                    {
+                      annee: 2022,
+                      session: "normale",
+                      sujet: "TD%20CHAPITRE%201.pdf",
+                      corrige: null
+                    }
                   ]
                 },
                 {
                   id: "francais",
                   nom: "Français",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    }
                   ]
                 },
                 {
                   id: "mathematiques",
                   nom: "Mathématiques",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    }
                   ]
                 },
                 {
                   id: "metrologie",
                   nom: "Métrologie",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "spéciale",
+                      sujet: "#",
+                      corrige: null
+                    }
                   ]
                 },
                 {
                   id: "microprocesseur",
                   nom: "Microprocesseur",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "normale", sujet: "#", corrige: "#" }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    }
                   ]
                 },
                 {
                   id: "regulation-et-asservissement",
                   nom: "Régulation et Asservissement",
                   annales: [
-                    { annee: 2024, session: "normale", sujet: "#", corrige: "#" },
-                    { annee: 2023, session: "spéciale", sujet: "#", corrige: null }
+                    {
+                      annee: 2024,
+                      session: "normale",
+                      sujet: "#",
+                      corrige: "#"
+                    },
+                    {
+                      annee: 2023,
+                      session: "spéciale",
+                      sujet: "#",
+                      corrige: null
+                    }
                   ]
                 }
               ]
@@ -812,12 +942,20 @@ function updateUserStatus() {
 
 // Vue Accueil
 function renderAccueil() {
-    const ecoleCards = ecoleData.map(ecole => {
-        const searchData = `${ecole.nom} ${ecole.description} ${ecole.filieres.map(f => f.nom).join(' ')}`.toLowerCase();
-        const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
-        const schoolColor = schoolColors[ecole.id];
-        const filieresHtml = ecole.filieres.slice(0,4).map(f => `<li><span class="campus-filiere-text">${f.nom}</span></li>`).join('');
-        return `
+  const ecoleCards = ecoleData
+    .map((ecole) => {
+      const searchData = `${ecole.nom} ${
+        ecole.description
+      } ${ecole.filieres.map((f) => f.nom).join(" ")}`.toLowerCase();
+      const logoHtml = `<img src="${ecole.logo}" alt="${ecole.nom} logo" class="campus-logo-img" onerror="this.style.display='none'">`;
+      const schoolColor = schoolColors[ecole.id];
+      const filieresHtml = ecole.filieres
+        .slice(0, 4)
+        .map(
+          (f) => `<li><span class="campus-filiere-text">${f.nom}</span></li>`
+        )
+        .join("");
+      return `
             <a href="#${ecole.id}" class="campus-card" data-search="${searchData}">
                 <div class="campus-logo">${logoHtml}</div>
                 <h3 style="color: ${schoolColor};">${ecole.nom}</h3>
@@ -825,21 +963,33 @@ function renderAccueil() {
                 <ul>${filieresHtml}</ul>
             </a>
         `;
-    }).join('');
+    })
+    .join("");
 
-    const latestList = annalesDataAccueil.map(annale => {
-        const ecoleId = annale.ecole === "ESG" ? "esg" : annale.ecole === "ISTA" ? "ista" : "isa";
-        const schoolColor = schoolColors[ecoleId];
-        return `
+  const latestList = annalesDataAccueil
+    .map((annale) => {
+      const ecoleId =
+        annale.ecole === "ESG"
+          ? "esg"
+          : annale.ecole === "ISTA"
+          ? "ista"
+          : "isa";
+      const schoolColor = schoolColors[ecoleId];
+      return `
             <li>
-                <span class="latest-badge" style="background: ${schoolColor};">${annale.ecole}</span>
-                <span class="latest-title"><a href="#${annale.lien}">${annale.filiere} (${annale.matiere})</a></span>
+                <span class="latest-badge" style="background: ${schoolColor};">${
+        annale.ecole
+      }</span>
+                <span class="latest-title"><a href="#${annale.lien}">${
+        annale.filiere
+      } (${annale.matiere})</a></span>
                 <span class="latest-meta">${annale.date || "récent"}</span>
             </li>
         `;
-    }).join('');
+    })
+    .join("");
 
-    return `
+  return `
         <section class="hero">
             <div class="container">
                 <h2>Révisez avec les annales des examens</h2>
@@ -1167,9 +1317,10 @@ function renderLogin() {
         <section class="section login-section">
             <h2>🔐 Connexion</h2>
             <p>Veuillez vous connecter pour accéder aux annales.</p>
+            <p class="location-warning">📍 La géolocalisation est requise pour des raisons de sécurité.</p>
             <div class="login-form">
                 <input type="text" id="login-nom" placeholder="Nom" class="login-input">
-                <input type="text" id="login-matricule" placeholder="Matricule (10 caractères, 4ème lettre)" class="login-input">
+                <input type="text" id="login-matricule" placeholder="Matricule" class="login-input">
                 <div id="login-error" class="login-error"></div>
                 <button id="login-btn" class="login-btn">Se connecter</button>
             </div>
@@ -1340,92 +1491,6 @@ function initUpload() {
   });
 }
 
-// ---------- GESTION DU BOUTON RETOUR (DOUBLE APPUI POUR QUITTER) ----------
-let backPressedOnce = false;
-let backTimer;
-
-// Fonction appelée lors de l'événement popstate (retour)
-function handleBackButton() {
-  const currentHash = window.location.hash.slice(1) || "login";
-  
-  // Uniquement sur la page d'accueil
-  if (currentHash === "accueil") {
-    if (!backPressedOnce) {
-      // Premier appui
-      backPressedOnce = true;
-      alert("Appuyez à nouveau sur le bouton retour pour quitter l'application.");
-      
-      // Réinitialiser après 2 secondes
-      backTimer = setTimeout(() => {
-        backPressedOnce = false;
-      }, 2000);
-      
-      // On push un état factice pour que le retour fonctionne
-      history.pushState({}, null, "#accueil");
-    } else {
-      // Deuxième appui consécutif
-      clearTimeout(backTimer);
-      backPressedOnce = false;
-      // Quitter l'application
-      window.close(); // Peut ne pas fonctionner si la fenêtre n'a pas été ouverte par script
-      // Alternative : rediriger vers une page vide
-      window.location.href = "about:blank";
-    }
-  } else {
-    // Sur les autres pages, on laisse le comportement normal
-    // On réinitialise le compteur au cas où
-    backPressedOnce = false;
-    clearTimeout(backTimer);
-  }
-}
-
-// Écouter l'événement popstate
-window.addEventListener("popstate", handleBackButton);
-
-// Au chargement, si on est sur accueil, on s'assure d'avoir un état dans l'historique
-if (window.location.hash === "#accueil") {
-  history.pushState({}, null, "#accueil");
-}
-
-// ---------- PROTECTION ANTI-CAPTURE D'ÉCRAN (dissuasion) ----------
-// On ajoute une classe CSS qui empêche la sélection et on écoute les événements
-document.addEventListener('contextmenu', (e) => e.preventDefault()); // Empêche clic droit
-document.addEventListener('keydown', (e) => {
-  // Empêche certaines combinaisons de touches courantes
-  if (e.key === 'PrintScreen') {
-    e.preventDefault();
-    alert('Les captures d\'écran ne sont pas autorisées.');
-  }
-  // Empêche Ctrl+P (imprimer) et Ctrl+S (sauvegarder)
-  if ((e.ctrlKey && (e.key === 'p' || e.key === 's')) || (e.metaKey && (e.key === 'p' || e.key === 's'))) {
-    e.preventDefault();
-    alert('Action non autorisée.');
-  }
-});
-
-// Détection de la perte de focus (peut indiquer une capture)
-let hidden, visibilityChange;
-if (typeof document.hidden !== "undefined") {
-  hidden = "hidden";
-  visibilityChange = "visibilitychange";
-} else if (typeof document.msHidden !== "undefined") {
-  hidden = "msHidden";
-  visibilityChange = "msvisibilitychange";
-} else if (typeof document.webkitHidden !== "undefined") {
-  hidden = "webkitHidden";
-  visibilityChange = "webkitvisibilitychange";
-}
-
-if (visibilityChange) {
-  document.addEventListener(visibilityChange, () => {
-    if (document[hidden]) {
-      // L'onglet est caché (possible capture)
-      // On peut afficher un message ou simplement logger
-      console.log("L'application n'est plus visible");
-    }
-  }, false);
-}
-
 // ---------- ROUTAGE ----------
 
 const app = document.getElementById("app");
@@ -1433,10 +1498,17 @@ function router() {
   const hash = window.location.hash.slice(1) || "login";
   const parts = hash.split("/").filter((p) => p.length > 0);
 
-  // Vérifier si l'utilisateur est connecté (sauf pour login et les pages publiques)
   const user = getUser();
   const publicPages = ["login", "conditions", "privacy", "mentions"];
-  if (!user && !publicPages.includes(hash) && !hash.startsWith("pdf/") && !hash.endsWith('.pdf')) {
+
+  // Si l'utilisateur est connecté et essaie d'aller sur la page de connexion, rediriger vers l'accueil
+  if (user && hash === "login") {
+    window.location.hash = "accueil";
+    return;
+  }
+
+  // Si l'utilisateur n'est pas connecté et que la page n'est pas publique, rediriger vers login
+  if (!user && !publicPages.includes(hash) && !hash.startsWith("pdf/") && !hash.endsWith(".pdf")) {
     window.location.hash = "login";
     return;
   }
@@ -1444,8 +1516,6 @@ function router() {
   if (hash === "accueil") {
     app.innerHTML = renderAccueil();
     document.title = "Accueil - Banque d'Annales IUG";
-    // Ajouter un état dans l'historique pour gérer le retour
-    history.pushState({ page: "accueil" }, null, "#accueil");
   } else if (hash === "contact") {
     app.innerHTML = renderContact();
     document.title = "Contact - Banque d'Annales IUG";
@@ -1456,15 +1526,42 @@ function router() {
       const nom = document.getElementById("login-nom").value.trim();
       const matricule = document.getElementById("login-matricule").value.trim();
       const errorDiv = document.getElementById("login-error");
-      const matriculeRegex = /^\d{3}[A-Za-z]\d{6}$/;
-      if (nom === "" || matricule === "") {
-        errorDiv.textContent = "Veuillez remplir tous les champs.";
-      } else if (!matriculeRegex.test(matricule)) {
-        errorDiv.textContent = "Le matricule doit faire 10 caractères : les 3 premiers chiffres, le 4ème une lettre, les 6 derniers chiffres.";
-      } else {
-        setUser({ nom, matricule });
-        window.location.replace("#accueil");
+
+      if (nom.toLowerCase() !== "admin iug" || matricule !== "123iug") {
+        errorDiv.textContent = "Nom ou matricule incorrect.";
+        return;
       }
+
+      // Vérifier que la géolocalisation est supportée
+      if (!navigator.geolocation) {
+        errorDiv.textContent = "La géolocalisation n'est pas supportée par votre navigateur.";
+        return;
+      }
+
+      errorDiv.textContent = "Demande de position...";
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log("Position obtenue :", position.coords);
+          // Ici, on pourrait plus tard vérifier si la position est dans une zone autorisée
+          setUser({ nom, matricule });
+          window.location.replace("#accueil");
+        },
+        (error) => {
+          let message = "Géolocalisation refusée. Vous devez autoriser la géolocalisation pour vous connecter.";
+          if (error.code === error.POSITION_UNAVAILABLE) {
+            message = "Position non disponible. Veuillez réessayer.";
+          } else if (error.code === error.TIMEOUT) {
+            message = "Délai d'attente de la géolocalisation dépassé. Veuillez réessayer.";
+          }
+          errorDiv.textContent = message;
+        },
+        {
+          enableHighAccuracy: false,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
     });
   } else if (hash === "conditions") {
     app.innerHTML = renderConditions();
@@ -1489,7 +1586,7 @@ function router() {
       app.innerHTML = renderPdf(filePath);
       document.title = "Document - Banque d'Annales IUG";
     }
-  } else if (parts.length === 1 && parts[0].endsWith('.pdf')) {
+  } else if (parts.length === 1 && parts[0].endsWith(".pdf")) {
     app.innerHTML = renderPdf(parts[0]);
     document.title = "Document - Banque d'Annales IUG";
   } else if (parts.length === 1 && ["esg", "ista", "isa"].includes(parts[0])) {
@@ -1546,9 +1643,14 @@ function router() {
   const scrollBtn = document.getElementById("scrollToTop");
   if (scrollBtn) {
     let color;
-    if (hash === "accueil" || hash === "contact" || hash === "login" || publicPages.includes(hash)) {
+    if (
+      hash === "accueil" ||
+      hash === "contact" ||
+      hash === "login" ||
+      publicPages.includes(hash)
+    ) {
       color = schoolColors.default;
-    } else if (parts[0] === "pdf" || parts[0].endsWith('.pdf')) {
+    } else if (parts[0] === "pdf" || parts[0].endsWith(".pdf")) {
       color = schoolColors.default;
     } else {
       const ecoleId = parts[0];
